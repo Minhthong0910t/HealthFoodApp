@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/id_HOME">
+    <fragment
+        android:id="@+id/id_HOME"
+        android:name="com.example.myapplication.fratmentquanly.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/id_adloaisp"
+        android:name="com.example.myapplication.fratmentquanly.LoaiSanPhamFragment"
+        android:label="LoaiSanPhamFragment" />
+    <fragment
+        android:id="@+id/id_addsanpham"
+        android:name="com.example.myapplication.fratmentquanly.SanPhamFragment"
+        android:label="SanPhamFragment" />
+    <fragment
+        android:id="@+id/id_addnhanvien"
+        android:name="com.example.myapplication.fratmentquanly.nhanvienFragment"
+        android:label="fragment_nhanvien"
+        tools:layout="@layout/fragment_nhanvien" />
+    <fragment
+        android:id="@+id/id_dangnhap"
+        android:name="com.example.myapplication.fratmentquanly.dangnnhapFragment"
+        android:label="fragment_dangnnhap"
+        tools:layout="@layout/fragment_dangnnhap" />
+    <fragment
+        android:id="@+id/id_doimatkhau"
+        android:name="com.example.myapplication.fratmentquanly.DoipasssFragment"
+        android:label="fragment_doipasss"
+        tools:layout="@layout/fragment_doipasss" />
+
+</navigation>
