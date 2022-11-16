@@ -1,37 +1,60 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
+
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 
 import android.os.Bundle;
-import android.view.View;
 
+
+import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
+import com.example.myapplication.FRAGMENT.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout mdrawerLayout;
-    NavigationView navigationView;
+    ChipNavigationBar chipNavigationBar;
+    FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mdrawerLayout = findViewById(R.id.drawlayout);
-        navigationView = findViewById(R.id.id_navigtion);
-
-        findViewById(R.id.immenu).setOnClickListener(new View.OnClickListener() {
+        hover();
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                mdrawerLayout.openDrawer(GravityCompat.START);
+            public void onItemSelected(int i) {
+                Fragment fragment = null;
+                switch (i){
+                    case R.id.home:
+                        fragment = new HomeFragment();
+                        break;
+                    case R.id.maps:
+                        fragment = new AddSanPhamFragment();
+                        break;
+
+
+                }
+                if(fragment!=null){
+                    fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                }
             }
         });
-        // navigation
-        navigationView.setItemIconTintList(null);
-        NavController navController = Navigation.findNavController(this, R.id.naHostFratment);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
     }
+    private void hover(){
+        //  ed_search_main = findViewById(R.id.ed_search);
+
+        // recyclerView = findViewById(R.id.recyrcle_danhSachSp_horizontal);
+        //recyclerViewFavorite  = findViewById(R.id.recyrcle_danhSachSp_favourite);
+        chipNavigationBar = findViewById(R.id.chipNavigationbar);
+
+
+    }
+
 }
