@@ -18,9 +18,11 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.ADAPTER.SpinnerLoaiSanPhamAdapter;
 import com.example.myapplication.MODEL.Loaisanpham;
 import com.example.myapplication.MODEL.Sanpham;
 import com.example.myapplication.R;
@@ -29,14 +31,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,8 +53,9 @@ public class AddSanPhamFragment extends Fragment {
     EditText ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta, ed_tenLoai,ed_maloai;
     ProgressDialog progressDialog;
     Button btn_add;
-
-
+    Spinner spinnerLoaisp;
+    List<Loaisanpham> loaisanphams;
+    SpinnerLoaiSanPhamAdapter spinnerLoaiSanPhamAdapter;
     private View view;
     //firestore
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -66,26 +73,36 @@ public class AddSanPhamFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_add_san_pham, container, false);
         anhXaView();
-
+        db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        Loaisanpham lsp = document.toObject(Loaisanpham.class);
+                        loaisanphams.add(lsp);
+                    }
+                    spinnerLoaiSanPhamAdapter = new SpinnerLoaiSanPhamAdapter(getContext(), loaisanphams);
+                    spinnerLoaisp.setAdapter(spinnerLoaiSanPhamAdapter);
+                }
+            }
+        });
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                //String masp, String name, double price, int time_ship, String describe, int amount, boolean favorite, String imgURL
-                String ma_loai = ed_maloai.getText().toString();
+
                 String masp = ed_masp.getText().toString();
                 String name = ed_ten.getText().toString();
                 double price = Double.parseDouble(ed_gia.getText().toString());
                 String describe = ed_mo_ta.getText().toString();
                 int time_ship = Integer.parseInt(ed_time.getText().toString());
-                String ten_loai= ed_tenLoai.getText().toString();
-               // List<Sanpham> list = new ArrayList<>();
-               // list.add(new Sanpham(masp, name, price, time_ship, describe, 0, false, muri, comments));
-                Map<String, Sanpham> map  = new HashMap<>();
-                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, false, muri, null,ten_loai));
-                Loaisanpham lsp = new Loaisanpham(ma_loai,ten_loai, map);
 
-                db.collection("LoaiSanPhams").document(ma_loai).set(lsp, SetOptions.merge())
+                Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
+                Map<String, Sanpham> map  = new HashMap<>();
+                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, false, muri, null,lsp.getName(),3));
+                Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(),lsp.getName(), map);
+
+                db.collection("LoaiSanPhams").document(lsp.getMaLoai()).set(lspnew, SetOptions.merge())
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -121,8 +138,10 @@ public class AddSanPhamFragment extends Fragment {
         ed_time = view.findViewById(R.id.ed_time);
         ed_mo_ta = view.findViewById(R.id.ed_mota);
         btn_add = view.findViewById(R.id.btn_add_sp);
-        ed_tenLoai = view.findViewById(R.id.ed_ten_loaisp);
-        ed_maloai = view.findViewById(R.id.ed_ma_loai);
+      //  ed_tenLoai = view.findViewById(R.id.ed_ten_loaisp);
+        //ed_maloai = view.findViewById(R.id.ed_ma_loai);
+        spinnerLoaisp = view.findViewById(R.id.spinner_loai_sp);
+        loaisanphams = new ArrayList<>();
         progressDialog = new ProgressDialog(getContext());
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
     }

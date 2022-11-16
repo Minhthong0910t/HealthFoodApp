@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 
 
+import com.example.myapplication.FRAGMENT.AddLoaiSanPham;
 import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
 import com.example.myapplication.FRAGMENT.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.maps:
                         fragment = new AddSanPhamFragment();
+                        break;
+                    case R.id.profile:
+                        fragment = new AddLoaiSanPham();
                         break;
 
 

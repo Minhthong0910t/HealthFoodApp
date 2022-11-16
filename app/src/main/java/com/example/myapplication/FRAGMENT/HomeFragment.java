@@ -90,10 +90,12 @@ public class HomeFragment extends Fragment implements ListenerFavorite {
                         Log.d(TAG, document.getId() + " => " + document.getData());
                         Loaisanpham lsp = (Loaisanpham) document.toObject(Loaisanpham.class);
                         Map<String, Sanpham> map_sp = lsp.getSanphams();
-
-                        for(Sanpham sp : map_sp.values()){
-                            sanPhamList.add(sp);
+                        if(map_sp!=null){
+                            for(Sanpham sp : map_sp.values()){
+                                sanPhamList.add(sp);
+                            }
                         }
+
                         loaiSanPhams.add(lsp);
                     }
 
