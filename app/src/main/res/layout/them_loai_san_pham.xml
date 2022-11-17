@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_input"
-            android:drawableStart="@drawable/custom_code"
+
             android:hint="Mã Loại"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
