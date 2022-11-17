@@ -7,8 +7,8 @@ public class Sanpham {
     private String name;
     private double price;
     private int time_ship;
-    private String describe;
-    private int amount;
+    private String describe;//mo ta
+    private int luot_mua;//so luong
 
     private boolean favorite;
     private String imgURL;
@@ -26,12 +26,13 @@ public class Sanpham {
         this.price = price;
         this.time_ship = time_ship;
         this.describe = describe;
-        this.amount = amount;
+        this.luot_mua = amount;
         this.favorite = favorite;
         this.imgURL = imgURL;
         this.comments = comments;
         this.ten_loai  = ten_loai;
         this.starDanhGia = starDanhGia;
+
     }
 
     public String getMasp() {
@@ -74,12 +75,12 @@ public class Sanpham {
         this.describe = describe;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getLuot_mua() {
+        return luot_mua;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setLuot_mua(int luot_mua) {
+        this.luot_mua = luot_mua;
     }
 
     public boolean isFavorite() {

@@ -14,16 +14,7 @@
         android:src="@drawable/img1"
         android:id="@+id/img_sanpham"
         />
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="ma loai san pham"-->
-<!--        android:id="@+id/ed_ma_loai"/>-->
-<!--    <EditText-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:hint="ten loai san pham"-->
-<!--        android:id="@+id/ed_ten_loaisp"/>-->
+
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

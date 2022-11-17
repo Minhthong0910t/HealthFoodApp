@@ -11,9 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.myapplication.ADAPTER.DanhSachSanPhamGridAdapter;
 import com.example.myapplication.ADAPTER.LoaiSanPhamAdapter;
+import com.example.myapplication.ADAPTER.SanPhamAdapter;
 import com.example.myapplication.ADAPTER.SanPhamNgangAdapter;
 import com.example.myapplication.MODEL.ListenerFavorite;
 import com.example.myapplication.MODEL.Loaisanpham;
@@ -42,6 +45,8 @@ public class HomeFragment extends Fragment implements ListenerFavorite {
     List<Sanpham> sanPhamList;
 
 
+    RecyclerView recyclerSanPham;
+    SanPhamAdapter sanPhamAdapter;
 
     RecyclerView recyclerViewFavorite;
 
@@ -71,10 +76,10 @@ public class HomeFragment extends Fragment implements ListenerFavorite {
         img_boloc = view.findViewById(R.id.img_boloc);
         recyclerView_sanpham = view.findViewById(R.id.recyrcle_danhSachSp_horizontal);
         recyclerView_loaisp = view.findViewById(R.id.recycler_loaiSp);
-
+        recyclerSanPham = view.findViewById(R.id.recyrcle_Sp);
         sanPhamList = new ArrayList<>();
         loaiSanPhams = new ArrayList<>();
-
+        recyclerSanPham.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView_loaisp.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         recyclerView_sanpham.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
     }
@@ -105,6 +110,9 @@ public class HomeFragment extends Fragment implements ListenerFavorite {
                     sanPhamNgangAdapter = new SanPhamNgangAdapter(getContext(), sanPhamList);
                     sanPhamNgangAdapter.notifyDataSetChanged();
                     recyclerView_sanpham.setAdapter(sanPhamNgangAdapter);
+
+                   sanPhamAdapter = new SanPhamAdapter(getContext(), sanPhamList);
+                    recyclerSanPham.setAdapter(sanPhamAdapter);
                 } else {
                     Log.d(TAG, "Error getting documents: ", task.getException());
                 }

@@ -52,10 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void hover(){
-        //  ed_search_main = findViewById(R.id.ed_search);
 
-        // recyclerView = findViewById(R.id.recyrcle_danhSachSp_horizontal);
-        //recyclerViewFavorite  = findViewById(R.id.recyrcle_danhSachSp_favourite);
         chipNavigationBar = findViewById(R.id.chipNavigationbar);
 
 

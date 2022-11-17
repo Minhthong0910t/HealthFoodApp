@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/nean"
     tools:context=".FRAGMENT.HomeFragment">
 
     <LinearLayout
@@ -62,7 +63,8 @@
         android:layout_height="wrap_content">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,17 +101,21 @@
                         />
                 </LinearLayout>
 
-
-                <GridView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_below="@id/layoutScroll"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="800dp"
                     android:numColumns="2"
-                    android:id="@+id/grid_dssp"/>
+                    android:verticalSpacing="10dp"
+                    android:horizontalSpacing="10dp"
+                    android:id="@+id/recyrcle_Sp"
+                    />
 
             </LinearLayout>
 
         </ScrollView>
+
     </LinearLayout>
 
 </RelativeLayout>
