@@ -24,20 +24,20 @@
             android:textStyle="bold|italic" />
 
         <EditText
-            android:id="@+id/ed_username"
+            android:id="@+id/ed_ma_loai"
             android:layout_width="304dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_input"
-
+            android:drawableStart="@drawable/ic_baseline_code_24"
             android:hint="Mã Loại"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/ed_password"
+            android:id="@+id/ed_ten_loai"
             android:layout_width="304dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -59,6 +59,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_add_loai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -66,6 +67,7 @@
                 android:text="Thêm Loại" />
 
             <Button
+                android:id="@+id/btn_xoa_trang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#8b4513"

@@ -13,6 +13,7 @@
         android:src="@drawable/logoo" />
 
     <EditText
+        android:id="@+id/ed_name"
         android:layout_width="304dp"
         android:layout_height="50dp"
         android:paddingStart="12dp"
@@ -24,6 +25,7 @@
         android:hint="Name"
         android:textSize="20dp" />
     <EditText
+        android:id="@+id/ed_email"
         android:layout_width="304dp"
         android:layout_height="50dp"
         android:paddingStart="12dp"
@@ -35,6 +37,7 @@
         android:hint="Email"
         android:textSize="20dp" />
     <EditText
+        android:id="@+id/ed_password"
         android:layout_width="304dp"
         android:layout_height="50dp"
         android:paddingStart="12dp"
@@ -46,6 +49,7 @@
         android:hint="Password"
         android:textSize="20dp" />
     <EditText
+        android:id="@+id/enter_password"
         android:layout_width="304dp"
         android:layout_height="50dp"
         android:paddingStart="12dp"
@@ -94,12 +98,13 @@
 
 
     <Button
+        android:id="@+id/btn_ok"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:backgroundTint="#181818"
-        android:text="Sign in"
+        android:text="SAVE"
         android:textColor="@color/white" />
 
     <TextView

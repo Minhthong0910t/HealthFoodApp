@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.view.GravityCompat;
@@ -11,28 +15,47 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.FRAGMENT.AddLoaiSanPham;
 import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
+import com.example.myapplication.FRAGMENT.FragmentProfile;
 import com.example.myapplication.FRAGMENT.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     ChipNavigationBar chipNavigationBar;
     FragmentManager fragmentManager;
 
 
+
     DrawerLayout mdrawerLayout;
     NavigationView navigationView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hover();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.naHostFratment, new HomeFragment()).commit();
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
@@ -44,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case R.id.maps:
-                        fragment = new AddSanPhamFragment();
+//                        fragment = new AddSanPhamFragment();
+                        FirebaseAuth.getInstance().signOut();
+                        finish();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                     case R.id.profile:
                         fragment = new AddLoaiSanPham();
@@ -66,10 +92,12 @@ public class MainActivity extends AppCompatActivity {
         });
         // navigation
         navigationView.setItemIconTintList(null);
-        NavController navController = Navigation.findNavController(this, R.id.naHostFratment);
+         NavController navController = Navigation.findNavController(this, R.id.naHostFratment);
         NavigationUI.setupWithNavController(navigationView, navController);
 
     }
+
+
     private void hover(){
 
         chipNavigationBar = findViewById(R.id.chipNavigationbar);

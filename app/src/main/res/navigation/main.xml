@@ -13,12 +13,12 @@
         android:id="@+id/id_adloaisp"
         android:name="com.example.myapplication.FRAGMENT.AddLoaiSanPham"
         android:label="LoaiSanPhamFragment"
-        tools:layout="@layout/fragment_add_loai_san_pham"/>
+        tools:layout="@layout/them_loai_san_pham"/>
     <fragment
         android:id="@+id/id_addsanpham"
         android:name="com.example.myapplication.FRAGMENT.AddSanPhamFragment"
         android:label="SanPhamFragment"
-        tools:layout="@layout/fragment_add_san_pham"/>
+        tools:layout="@layout/them_san_pham"/>
     <fragment
         android:id="@+id/id_addyeuthich"
         android:name="com.example.myapplication.FRAGMENT.SanPhamYeuThichFragment"

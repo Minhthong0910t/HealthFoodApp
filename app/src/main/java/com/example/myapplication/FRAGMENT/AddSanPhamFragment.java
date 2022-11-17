@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -49,8 +50,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddSanPhamFragment extends Fragment {
     //view
-    CircleImageView img_sp;
-    EditText ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta, ed_tenLoai,ed_maloai;
+    ImageView btn_upload,img_sp;
+
+    EditText ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta;
     ProgressDialog progressDialog;
     Button btn_add;
     Spinner spinnerLoaisp;
@@ -71,7 +73,7 @@ public class AddSanPhamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_add_san_pham, container, false);
+        view = inflater.inflate(R.layout.them_san_pham, container, false);
         anhXaView();
         db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -121,7 +123,7 @@ public class AddSanPhamFragment extends Fragment {
 
             }
         });
-        img_sp.setOnClickListener(new View.OnClickListener() {
+        btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openImg();
@@ -131,15 +133,15 @@ public class AddSanPhamFragment extends Fragment {
     }
 
     private void anhXaView() {
-        img_sp = view.findViewById(R.id.img_sanpham);
+        btn_upload = view.findViewById(R.id.btn_upload);
+        img_sp = view.findViewById(R.id.img_sp);
         ed_ten = view.findViewById(R.id.ed_name_sp);
         ed_gia = view.findViewById(R.id.ed_gia_sp);
         ed_masp = view.findViewById(R.id.ed_ma_sp);
         ed_time = view.findViewById(R.id.ed_time);
         ed_mo_ta = view.findViewById(R.id.ed_mota);
         btn_add = view.findViewById(R.id.btn_add_sp);
-      //  ed_tenLoai = view.findViewById(R.id.ed_ten_loaisp);
-        //ed_maloai = view.findViewById(R.id.ed_ma_loai);
+
         spinnerLoaisp = view.findViewById(R.id.spinner_loai_sp);
         loaisanphams = new ArrayList<>();
         progressDialog = new ProgressDialog(getContext());

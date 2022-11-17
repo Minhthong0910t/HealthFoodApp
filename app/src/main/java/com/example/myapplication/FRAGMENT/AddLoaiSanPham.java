@@ -22,14 +22,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AddLoaiSanPham extends Fragment {
 
 TextView ed_ten, ed_ma;
-Button btnadd;
+Button btnadd, btn_xoa_trang;
     View view;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_add_loai_san_pham, container, false);
+        view = inflater.inflate(R.layout.them_loai_san_pham, container, false);
 
         anhXaView();
         btnadd.setOnClickListener(new View.OnClickListener() {
@@ -48,11 +48,20 @@ Button btnadd;
                 });
             }
         });
+
+        btn_xoa_trang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ed_ten.setText("");
+                ed_ma.setText("");
+            }
+        });
         return view;
     }
     private void anhXaView(){
         ed_ten = view.findViewById(R.id.ed_ten_loai);
         ed_ma = view.findViewById(R.id.ed_ma_loai);
         btnadd = view.findViewById(R.id.btn_add_loai);
+        btn_xoa_trang = view.findViewById(R.id.btn_xoa_trang);
     }
 }

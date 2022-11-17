@@ -15,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.FRAGMENT.HomeFragment;
 import com.example.myapplication.MODEL.Loaisanpham;
 import com.example.myapplication.MODEL.Sanpham;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 
@@ -33,6 +35,7 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
     private Context context;
     private List<Sanpham>list;
 
+    public HomeFragment fragHome = new HomeFragment();
     public SanPhamNgangAdapter(Context context, List<Sanpham> list) {
         this.context = context;
         this.list = list;
@@ -118,6 +121,7 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
                         Loaisanpham lsp = (Loaisanpham) document.toObject(Loaisanpham.class);
                         if(lsp.getName().equals(namecompare)){
                             db.collection("LoaiSanPhams").document(document.getId()).update("sanphams."+masp_update+".favorite", status);
+                          //  fragHome.onClickReadData(document.getId());
                         }
                     }
                 }
