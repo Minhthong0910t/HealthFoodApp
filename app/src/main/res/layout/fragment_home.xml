@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FRAGMENT.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/header_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/background_border_input_opacity"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            android:alpha="0.8"
+            android:src="@drawable/ic_serch" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:background="@drawable/background_border_input_opacity"
+            android:hint="healthy food"
+            android:paddingLeft="40dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="32dp"
+            android:src="@drawable/boloc"
+            android:id="@+id/img_boloc"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_btn_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_search">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_loaiSp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutScroll"
+        android:layout_below="@id/layout_btn_filter"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyrcle_danhSachSp_horizontal"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:weightSum="10"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    >
+                    <TextView
+                        android:layout_weight="7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text="Favorite restaurant"
+                        android:layout_marginLeft="10dp"
+                        />
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="see all"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+
+                <GridView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="800dp"
+                    android:numColumns="2"
+                    android:id="@+id/grid_dssp"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>
