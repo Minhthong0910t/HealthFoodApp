@@ -15,6 +15,7 @@ import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.MODEL.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +28,8 @@ public class RegisterrActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 // ...
 // Initialize Firebase Auth
-  EditText ed_name, ed_email,ed_password,enterpassword;
+TextInputLayout til_username,til_password,til_enterpassword, til_ed_email;
+    EditText ed_name, ed_email,ed_password,enterpassword;
   Button btn_add;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,15 @@ public class RegisterrActivity extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = ed_name.getText().toString();
+                String enterpass = enterpassword.getText().toString();
+
                 String email = ed_email.getText().toString();
                 String password = ed_password.getText().toString();
-                register(email,password);
+                if( validate(name,password,email,enterpass)){
+                    register(email,password);
+            }
+
             }
         });
     }
@@ -93,5 +101,37 @@ public class RegisterrActivity extends AppCompatActivity {
         ed_password = findViewById(R.id.ed_password);
         enterpassword = findViewById(R.id.enter_password);
         btn_add = findViewById(R.id.btn_ok);
+       til_enterpassword=findViewById(R.id.til_enter_password);
+       til_username = findViewById(R.id.til_ed_name);
+       til_password = findViewById(R.id.til_ed_password);
+       til_ed_email=findViewById(R.id.til_ed_email);
+
+
+   }
+    private boolean  validate(String name,String pass, String email, String enterpass){
+
+
+        if(name.isEmpty()){
+            til_username.setError("Tên đăng nhập không đuọc để trống");
+        }else{
+            til_username.setError("");
+        }
+        if(pass.length()==0){
+            til_password.setError("Mật khẩu không được để trống");
+        }else{
+            til_password.setError("");
+        }
+        if(email.length()==0){
+            til_ed_email.setError("Email không được để trống");
+
+        }else{
+            til_ed_email.setError("");
+        }
+        if(enterpass.length()==0){
+            til_enterpassword.setError("Mật khẩu không được để trống");
+        }else{
+            til_enterpassword.setError("");
+        }
+        return false;
     }
 }

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:src="@drawable/img1"
+
+                    />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_tha_tym"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:gravity="bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_favorite_24" />
+
+                <ImageView
+                    android:id="@+id/img_tymbay"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_favorite_24" />
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+     <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             >
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:paddingEnd="20dp"
+                 android:weightSum="10">
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_margin="20dp"
+                     android:layout_weight="2"
+                     android:background="@drawable/backbround_start_chi_tiet_san_pham"
+                     android:gravity="center">
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginRight="5dp"
+                         android:text="5"
+                         android:textColor="@color/black" />
+
+                     <ImageView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:src="@drawable/ic_star" />
+
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="45dp"
+                     android:layout_marginTop="20dp"
+                     android:layout_marginBottom="20dp"
+                     android:layout_weight="5"
+                     android:background="@drawable/background_soluonggg"
+                     android:gravity="center">
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginRight="5dp"
+                         android:text="-   "
+                         android:textStyle="bold"
+                         android:textSize="20dp"
+                         android:textColor="@color/black" />
+
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginRight="5dp"
+                         android:text="10"
+                         android:textStyle="bold"
+                         android:textSize="20dp"
+                         android:textColor="@color/black" />
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginRight="5dp"
+                         android:text="   +"
+                         android:textStyle="bold"
+                         android:textSize="20dp"
+                         android:textColor="@color/black" />
+
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="50dp"
+                     android:layout_marginTop="20dp"
+                     android:layout_weight="2"
+                     android:background="@drawable/background_so_luong_don_hang"
+                     android:gravity="center"
+                     android:orientation="horizontal"
+                     android:padding="4dp">
+
+                     <ImageView
+                         android:layout_width="wrap_content"
+                         android:layout_height="20dp"
+                         android:src="@drawable/ic_cart" />
+                 </LinearLayout>
+             </LinearLayout>
+
+             <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Spci Chicken RiceMix"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold" />
+    <TextView
+        android:drawableStart="@drawable/ic_baseline_access_alarm_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="10 - 15 Min"
+        android:textStyle="bold" />
+
+</LinearLayout>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="   Day la phan mo ta viet dai dai mot ti nhin cho no dep.Day la phan mo ta viet dai dai mot ti nhin cho no dep.Day la phan mo ta viet dai dai mot ti nhin cho no dep.Day la phan mo ta viet dai dai mot ti nhin cho no dep "
+                 android:layout_margin="20dp"/>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="Đánh giá"
+                 android:textSize="17dp"
+                 android:textColor="#011F82"
+                 android:textStyle="bold|italic"
+                 android:layout_marginEnd="20dp"
+                 android:layout_marginStart="20dp"/>
+             <ListView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="10dp"/>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:layout_marginBottom="20dp"
+                 android:weightSum="10">
+
+                 <EditText
+                     android:layout_width="255dp"
+                     android:layout_height="35dp"
+                     android:layout_marginLeft="20dp"
+                     android:layout_weight="8"
+                     android:background="@drawable/custom_input"
+                     android:drawableStart="@drawable/custom_name_focus" />
+
+                 <Button
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="20dp"
+                     android:layout_marginEnd="20dp"
+                     android:text="Đăng" />
+             </LinearLayout>
+
+
+
+         </LinearLayout>
+
+
+     </ScrollView>
+
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total price:"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="$"
+                    android:textColor="#F3DC11"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="36.00"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@drawable/backdroud_buttonmua"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iconmthanhtoan" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/black"
+                android:text="click buy"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

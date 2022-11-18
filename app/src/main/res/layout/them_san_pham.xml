@@ -9,12 +9,12 @@
         android:layout_margin="10dp"
         android:orientation="vertical"
         android:layout_height="match_parent">
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="mã sản phẩm"
             android:id="@+id/ed_ma_sp"
-            android:textStyle="bold"/>
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:hint="mã sản phẩm" />
 <EditText
     android:id="@+id/ed_name_sp"
     android:layout_width="match_parent"
@@ -43,13 +43,13 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/up_file"/>
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="thoi gian giao hang"
-            android:inputType="number"
             android:id="@+id/ed_time"
-            />
+            android:layout_width="270dp"
+            android:layout_height="48dp"
+            android:hint="thoi gian giao hang"
+            android:inputType="number" />
         <EditText
             android:id="@+id/ed_mota"
             android:layout_width="match_parent"
