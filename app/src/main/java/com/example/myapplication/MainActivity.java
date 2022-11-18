@@ -39,7 +39,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    ChipNavigationBar chipNavigationBar;
+    public  ChipNavigationBar chipNavigationBar;
     FragmentManager fragmentManager;
 
 

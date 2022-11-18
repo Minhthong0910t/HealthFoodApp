@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:padding="10dp"
+    android:layout_marginTop="5dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/infoUser"
-            android:weightSum="10">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avt"
                 android:layout_width="40dp"
@@ -20,65 +19,66 @@
                 />
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:text="Tên người dùng"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:layout_gravity="center_vertical"
+                android:layout_toRightOf="@id/img_avt"
                 />
-        </LinearLayout>
         <LinearLayout
-            android:id="@+id/startDanhGia"
-            android:layout_below="@id/infoUser"
-            android:layout_width="match_parent"
+            android:id="@+id/layout_star"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:weightSum="10"
-            android:layout_marginLeft="10dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_star"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_star"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_star"/>
-                <ImageView
-                    android:id="@+id/img_start4"
-                    android:layout_width="20dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_star"/>
-                <ImageView
-                    android:id="@+id/img_start5"
-                    android:layout_width="20dp"
-                    android:layout_height="14dp"
-                    android:src="@drawable/ic_star"/>
-            </LinearLayout>
+            android:layout_below="@id/tv_name"
+            android:layout_toRightOf="@id/img_avt"
+            android:layout_gravity="center_vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_star"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_star"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_star"/>
+            <ImageView
+                android:id="@+id/img_start4"
+                android:layout_width="20dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_star"/>
+            <ImageView
+                android:id="@+id/img_start5"
+                android:layout_width="20dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_star"/>
+        </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_timeCMT"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
                 android:layout_marginRight="100dp"
-                android:text="10/10/2022"/>
-        </LinearLayout>
+                android:layout_below="@id/layout_star"
+                android:layout_toRightOf="@id/img_avt"
+                android:layout_marginTop="4dp"
+                android:textSize="12dp"
+                android:textStyle="italic"
+                android:text="10/10/2022 20:00:00"/>
+
         <TextView
             android:id="@+id/tv_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/startDanhGia"
-            android:layout_marginLeft="10dp"
+            android:layout_below="@id/tv_timeCMT"
+            android:layout_toRightOf="@id/img_avt"
             android:layout_marginRight="10dp"
             android:layout_marginTop="4dp"
+            android:textStyle="bold"
             android:text="sản phẩm này không phải là thuốc và không có tác dụng thay thế thuốc chữa "/>
     </RelativeLayout>
 

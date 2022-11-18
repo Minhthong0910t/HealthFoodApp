@@ -67,7 +67,10 @@ public class RegisterrActivity extends AppCompatActivity {
                            if(email.matches("^nhanvien+\\w+\\@+\\w+\\.+\\w+")){
                                 //String id, String name, tring email, String password, String imgURL, int loaiUser, String sdt, String diachi
                                  NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",2,"chưa thêm số điện thoại", "chưa thêm địa chỉ");
-                                db.collection("Users").document("nhanvien").set(nv).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                db.collection("Users").document("nhanvien")
+                                                .collection("nhanviens")
+                                                        .document()
+                                                                .set(nv).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){

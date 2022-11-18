@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.ADAPTER.SpinnerLoaiSanPhamAdapter;
 import com.example.myapplication.MODEL.Loaisanpham;
 import com.example.myapplication.MODEL.Sanpham;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,6 +75,8 @@ public class AddSanPhamFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.them_san_pham, container, false);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.chipNavigationBar.setVisibility(View.GONE);
         anhXaView();
         db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

@@ -126,7 +126,9 @@ CommentAdapter commentAdapter;
             @Override
             public void onClick(View view) {
                 String content = ed_cmt.getText().toString();
-                db.collection("Users").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                db.collection("Users").document("nhanvien")
+                        .collection("nhanviens")
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
                         if (e != null) {
@@ -136,8 +138,6 @@ CommentAdapter commentAdapter;
                         for(QueryDocumentSnapshot document : value){
                             User usr = document.toObject(User.class);
                             if(usr.getId().equals(iduser)){
-                                Map<String, Comment> map_cmt = new HashMap<>();
-
                                     Comment cm = new Comment();
                                     cm.setId_comment(content);
                                     cm.setId_user(iduser);
@@ -152,8 +152,7 @@ CommentAdapter commentAdapter;
                                         cm.setTime_comment(timeCureent);
                                     }
                                     cm.setSoSaoDanhGia(5);
-                                    //(masp, name, price, time_ship, describe, 0, false, muri, null,lsp.getName(),3
-                                   // map.put(maSP, new Sanpham(maSP, name, dgia, timeShip, moTa, 0,favorite, urlIMG, map_cmt, tenLoai, star));
+
                                     db.collection("LoaiSanPhams").addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override
                                         public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
