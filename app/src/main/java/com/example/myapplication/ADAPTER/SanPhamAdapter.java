@@ -56,11 +56,11 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhold
 
         Glide.with(context).load(sp.getImgURL()).into(holder.img_sp);
         holder.tv_ten.setText(sp.getName());
-//        if(sp.getDescribe().length()>50){
-//            holder.tv_mo_Ta.setText(sp.getDescribe().substring(0,50) + "...");
-//        }else {
-//            holder.tv_mo_Ta.setText(sp.getDescribe());
-//        }
+        if(sp.getDescribe().length()>50){
+            holder.tv_mo_Ta.setText(sp.getDescribe().substring(0,50) + "...");
+        }else {
+            holder.tv_mo_Ta.setText(sp.getDescribe());
+        }
 
         holder.tv_gia.setText("Giá: " + sp.getPrice()+"$");
         holder.tv_ten_loai.setText(sp.getTen_loai());

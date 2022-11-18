@@ -49,6 +49,15 @@
         android:text="Log in"
         android:id="@+id/btn_login"
         android:textColor="@color/white" />
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#181818"
+        android:text="Sign up"
+        android:id="@+id/btn_dangky"
+        android:textColor="@color/white" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,6 +65,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="or Log in with" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,5 +92,6 @@
             android:layout_height="match_parent"
             android:layout_marginStart="50dp"
             android:src="@drawable/apple" />
+
     </LinearLayout>
 </LinearLayout>

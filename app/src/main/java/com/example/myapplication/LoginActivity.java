@@ -30,7 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LoginActivity extends AppCompatActivity {
 ImageView img_login;
 EditText ed_user, ed_pass;
-Button btn_login;
+Button btn_login, btn_dangky;
 private FirebaseAuth mAuth;
 GoogleSignInOptions googleSignInOptions;
 GoogleSignInClient googleSignInClient;
@@ -50,7 +50,12 @@ int REQUEST_CODE_SIGIN = 100;
                 clickLogin(username, passWord);
             }
         });
-
+        btn_dangky.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegisterrActivity.class));
+            }
+        });
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -101,6 +106,7 @@ int REQUEST_CODE_SIGIN = 100;
         ed_user = findViewById(R.id.ed_username);
         ed_pass = findViewById(R.id.ed_password);
         btn_login = findViewById(R.id.btn_login);
+        btn_dangky = findViewById(R.id.btn_dangky);
     }
 
 

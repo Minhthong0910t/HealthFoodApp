@@ -20,25 +20,22 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.ADAPTER.CommentAdapter;
 import com.example.myapplication.MODEL.Comment;
 import com.example.myapplication.MODEL.Loaisanpham;
-import com.example.myapplication.MODEL.Sanpham;
 import com.example.myapplication.MODEL.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +104,12 @@ CommentAdapter commentAdapter;
                                             Log.d(TAG, "onEvent: "+comments.size());
 
                                         }
+                                        Collections.sort(comments, new Comparator<Comment>() {
+                                            @Override
+                                            public int compare(Comment comment, Comment t1) {
+                                                return t1.getTime_comment().compareTo(comment.getTime_comment());
+                                            }
+                                        });
                                         commentAdapter = new CommentAdapter(ChiTietSanPham.this, comments);
                                         recyrcleDanhGia.setAdapter(commentAdapter);
                                     }

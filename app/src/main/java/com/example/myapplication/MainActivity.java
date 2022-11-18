@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         hover();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.naHostFratment, new HomeFragment()).commit();
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
