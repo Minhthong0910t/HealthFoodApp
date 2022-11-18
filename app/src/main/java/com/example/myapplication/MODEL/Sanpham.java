@@ -10,7 +10,7 @@ public class Sanpham {
     private String describe;//mo ta
     private int luot_mua;//so luong
 
-    private boolean favorite;
+    private int favorite;
     private String imgURL;
     private Map<String, Comment> comments;
     private String ten_loai;
@@ -20,7 +20,7 @@ public class Sanpham {
     public Sanpham() {
     }
 
-    public Sanpham(String masp, String name, double price, int time_ship, String describe, int amount, boolean favorite, String imgURL, Map<String, Comment> comments,String ten_loai,int starDanhGia) {
+    public Sanpham(String masp, String name, double price, int time_ship, String describe, int amount, int favorite, String imgURL, Map<String, Comment> comments,String ten_loai,int starDanhGia) {
         this.masp = masp;
         this.name = name;
         this.price = price;
@@ -83,11 +83,11 @@ public class Sanpham {
         this.luot_mua = luot_mua;
     }
 
-    public boolean isFavorite() {
+    public int getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(boolean favorite) {
+    public void setFavorite(int favorite) {
         this.favorite = favorite;
     }
 

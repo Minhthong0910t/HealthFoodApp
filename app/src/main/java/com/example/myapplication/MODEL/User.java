@@ -5,20 +5,20 @@ import java.util.Map;
 public class User {
     private String id;
     private String name, email, password, imgURL;
-
+    private boolean trangThaiTym;
     private int LoaiUser;
 
     public User() {
     }
 
-    public User(String id, String name, String email, String password, String imgURL, int loaiUser) {
+    public User(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.imgURL = imgURL;
+        this.trangThaiTym = trangThaiTym;
         LoaiUser = loaiUser;
-
     }
 
     public String getImgURL() {
@@ -29,7 +29,13 @@ public class User {
         this.imgURL = imgURL;
     }
 
+    public boolean isTrangThaiTym() {
+        return trangThaiTym;
+    }
 
+    public void setTrangThaiTym(boolean trangThaiTym) {
+        this.trangThaiTym = trangThaiTym;
+    }
 
     public String getId() {
         return id;

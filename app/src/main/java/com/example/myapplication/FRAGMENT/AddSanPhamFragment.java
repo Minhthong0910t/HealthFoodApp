@@ -104,7 +104,7 @@ public class AddSanPhamFragment extends Fragment {
 
                 Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
                 Map<String, Sanpham> map  = new HashMap<>();
-                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, false, muri, null,lsp.getName(),3));
+                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, 0, muri, null,lsp.getName(),3));
                 Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(),lsp.getName(), map);
 
                 db.collection("LoaiSanPhams").document(lsp.getMaLoai()).set(lspnew, SetOptions.merge())

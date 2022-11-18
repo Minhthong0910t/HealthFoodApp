@@ -65,8 +65,8 @@ public class RegisterrActivity extends AppCompatActivity {
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                            if(email.matches("^nhanvien+\\w+\\@+\\w+\\.+\\w+")){
-                                //String id, String name, tring email, String password, String imgURL, int loaiUser, String sdt, String diachi
-                                 NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",2,"chưa thêm số điện thoại", "chưa thêm địa chỉ");
+                             //  String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, String sdt, String diachi
+                                 NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",false,2,"chưa thêm số điện thoại", "chưa thêm địa chỉ");
                                 db.collection("Users").document("nhanvien")
                                                 .collection("nhanviens")
                                                         .document()

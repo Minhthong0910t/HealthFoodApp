@@ -94,10 +94,10 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhold
                 intent.putExtra("hinhAnh", sp.getImgURL());
                 intent.putExtra("moTa", sp.getDescribe());
                 intent.putExtra("star", sp.getStarDanhGia());
-                intent.putExtra("favorite", sp.isFavorite());
+                intent.putExtra("favorite", sp.getFavorite());
                 intent.putExtra("time", sp.getTime_ship());
                 intent.putExtra("tenLoai", sp.getTen_loai());
-                intent.putExtra("comments", (Serializable) sp.getComments());
+
 
                 context.startActivity(intent);
             }

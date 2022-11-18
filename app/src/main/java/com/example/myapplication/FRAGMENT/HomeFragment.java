@@ -39,11 +39,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends Fragment implements ListenerFavorite {
+public class HomeFragment extends Fragment {
     ImageView img_boloc;
 
     private String TAG = "homefragment";
-
 
     RecyclerView recyclerView_sanpham;
    SanPhamNgangAdapter sanPhamNgangAdapter;
@@ -53,8 +52,6 @@ public class HomeFragment extends Fragment implements ListenerFavorite {
 
     RecyclerView recyclerSanPham;
     SanPhamAdapter sanPhamAdapter;
-
-    RecyclerView recyclerViewFavorite;
 
 
     //loaisanpham
@@ -130,52 +127,7 @@ public class HomeFragment extends Fragment implements ListenerFavorite {
                         sanPhamAdapter = new SanPhamAdapter(getContext(), sanPhamList);
                         recyclerSanPham.setAdapter(sanPhamAdapter);
                     }
-
                 });
-
-
     }
 
-    @Override
-    public void onClickReadData(String id) {
-        List<Sanpham> splistNew = new ArrayList<>();
-        db.collection("LoaiSanPhams")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
-
-
-                        for (QueryDocumentSnapshot doc : value) {
-                          //  loaisanphamsnew.add(doc.toObject(Loaisanpham.class));
-                            Loaisanpham lsp = doc.toObject(Loaisanpham.class);
-                            Map<String, Sanpham> map_sp = lsp.getSanphams();
-                            if(map_sp!=null){
-                                for(Sanpham sp : map_sp.values()){
-                                    splistNew.add(sp);
-                                }
-                            }
-                        }
-
-                        Log.d(TAG, "list lsp " + splistNew.size());
-                       // loaiSanPhamAdapter = new LoaiSanPhamAdapter(getContext(), loaiSanPhams);
-                      //  loaiSanPhamAdapter.notifyDataSetChanged();
-                      //  recyclerView_loaisp.setAdapter(loaiSanPhamAdapter);
-
-                        sanPhamNgangAdapter = new SanPhamNgangAdapter(getContext(), splistNew);
-                        sanPhamNgangAdapter.notifyDataSetChanged();
-                        recyclerView_sanpham.setAdapter(sanPhamNgangAdapter);
-
-                        sanPhamAdapter = new SanPhamAdapter(getContext(), splistNew);
-                        recyclerSanPham.setAdapter(sanPhamAdapter);
-                    }
-
-                });
-
-
-    }
 }

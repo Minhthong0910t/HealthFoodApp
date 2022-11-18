@@ -7,10 +7,21 @@ public class NhanVien extends User{
         super.setLoaiUser(2);
     }
 
-    public NhanVien(String id, String name, String email, String password, String imgURL, int loaiUser, String sdt, String diachi) {
-        super(id, name, email, password, imgURL, loaiUser);
+    public NhanVien(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, String sdt, String diachi) {
+        super(id, name, email, password, imgURL, trangThaiTym, loaiUser);
         this.sdt = sdt;
         this.diachi = diachi;
+    }
+
+
+    @Override
+    public boolean isTrangThaiTym() {
+        return super.isTrangThaiTym();
+    }
+
+    @Override
+    public void setTrangThaiTym(boolean trangThaiTym) {
+        super.setTrangThaiTym(trangThaiTym);
     }
 
     @Override

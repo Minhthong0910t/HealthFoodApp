@@ -8,8 +8,18 @@ public class Admin extends User{
         super.setLoaiUser(1);
     }
 
-    public Admin(String id, String name, String email, String password, String imgURL, int loaiUser) {
-        super(id, name, email, password, imgURL, loaiUser);
+    public Admin(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser) {
+        super(id, name, email, password, imgURL, trangThaiTym, loaiUser);
+    }
+
+    @Override
+    public boolean isTrangThaiTym() {
+        return super.isTrangThaiTym();
+    }
+
+    @Override
+    public void setTrangThaiTym(boolean trangThaiTym) {
+        super.setTrangThaiTym(trangThaiTym);
     }
 
     @Override

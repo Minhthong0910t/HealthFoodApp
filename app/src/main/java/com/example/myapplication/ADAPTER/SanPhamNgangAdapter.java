@@ -1,13 +1,17 @@
 package com.example.myapplication.ADAPTER;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,14 +19,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.ChiTietSanPham;
 import com.example.myapplication.FRAGMENT.HomeFragment;
+import com.example.myapplication.LoginActivity;
 import com.example.myapplication.MODEL.Loaisanpham;
+import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.MODEL.Sanpham;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -50,6 +60,7 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Sanpham sp = list.get(position);
@@ -62,28 +73,14 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
         holder.tv_price.setText(sp.getPrice()+"$");
         holder.tv_minutes.setText(sp.getTime_ship()+"minutes");
         holder.tv_ten_loai.setText(sp.getTen_loai());
+        holder.tv_soLuotTym.setText(sp.getFavorite()+"");
+        FirebaseUser usercurent = FirebaseAuth.getInstance().getCurrentUser();
+        holder.img_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-       if(sp.isFavorite()){
-            holder.img_favorite.setImageResource(R.drawable.ic_favorite_24);
-
-       }else {
-           holder.img_favorite.setImageResource(R.drawable.ic_favorite_border_24);
-
-       }
-       holder.img_favorite.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               if(!sp.isFavorite()){
-                   holder.img_favorite.setImageResource(R.drawable.ic_favorite_24);
-
-                setFavoriteToServer(sp.getTen_loai(), sp.getMasp(),true);
-               }else {
-                   holder.img_favorite.setImageResource(R.drawable.ic_favorite_border_24);
-                   setFavoriteToServer(sp.getTen_loai(), sp.getMasp(),false);
-               }
-           }
-       });
-
+            }
+        });
 
     }
 
@@ -95,8 +92,8 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_sp, img_favorite;
-        TextView tv_name, tv_price, tv_minutes, tv_ten_loai;
+        ImageView img_sp, img_favorite, tym_bay;
+        TextView tv_name, tv_price, tv_minutes, tv_ten_loai,tv_soLuotTym;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img_sp = itemView.findViewById(R.id.img_food);
@@ -105,9 +102,13 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
             tv_price = itemView.findViewById(R.id.tv_price_food);
             tv_minutes = itemView.findViewById(R.id.tv_time_ship);
             tv_ten_loai = itemView.findViewById(R.id.tv_gerMan_food);
+            tv_soLuotTym = itemView.findViewById(R.id.tv_luotTym);
+            tym_bay = itemView.findViewById(R.id.imgFood_favoritebay);
+
         }
 
     }
+
 
     public void setFavoriteToServer(String namecompare, String masp_update, boolean status){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
