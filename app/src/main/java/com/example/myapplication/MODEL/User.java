@@ -6,12 +6,12 @@ public class User {
     private String id;
     private String name, email, password, imgURL;
     private boolean trangThaiTym;
-    private int LoaiUser;
+    private int LoaiUser, soSaoDanhGia;
 
     public User() {
     }
 
-    public User(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser) {
+    public User(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -19,6 +19,15 @@ public class User {
         this.imgURL = imgURL;
         this.trangThaiTym = trangThaiTym;
         LoaiUser = loaiUser;
+        this.soSaoDanhGia = soSaoDanhGia;
+    }
+
+    public int getSoSaoDanhGia() {
+        return soSaoDanhGia;
+    }
+
+    public void setSoSaoDanhGia(int soSaoDanhGia) {
+        this.soSaoDanhGia = soSaoDanhGia;
     }
 
     public String getImgURL() {

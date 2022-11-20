@@ -1,14 +1,28 @@
 package com.example.myapplication.MODEL;
 
-import java.util.Map;
+import java.util.List;
 
-public class Admin extends User{
+public class KhachHang extends User{
+    List<DonHang> list;
 
-    public Admin() {
-        super.setLoaiUser(1);
+    public KhachHang(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, List<DonHang> list) {
+        super(id, name, email, password, imgURL, trangThaiTym, loaiUser, soSaoDanhGia);
+        this.list = list;
     }
 
-    public Admin(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia) {
+    public List<DonHang> getList() {
+        return list;
+    }
+
+    public void setList(List<DonHang> list) {
+        this.list = list;
+    }
+
+    public KhachHang() {
+        super();
+    }
+
+    public KhachHang(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia) {
         super(id, name, email, password, imgURL, trangThaiTym, loaiUser, soSaoDanhGia);
     }
 
@@ -23,16 +37,6 @@ public class Admin extends User{
     }
 
     @Override
-    public boolean isTrangThaiTym() {
-        return super.isTrangThaiTym();
-    }
-
-    @Override
-    public void setTrangThaiTym(boolean trangThaiTym) {
-        super.setTrangThaiTym(trangThaiTym);
-    }
-
-    @Override
     public String getImgURL() {
         return super.getImgURL();
     }
@@ -40,6 +44,16 @@ public class Admin extends User{
     @Override
     public void setImgURL(String imgURL) {
         super.setImgURL(imgURL);
+    }
+
+    @Override
+    public boolean isTrangThaiTym() {
+        return super.isTrangThaiTym();
+    }
+
+    @Override
+    public void setTrangThaiTym(boolean trangThaiTym) {
+        super.setTrangThaiTym(trangThaiTym);
     }
 
     @Override

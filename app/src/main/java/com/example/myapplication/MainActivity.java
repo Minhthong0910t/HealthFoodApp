@@ -30,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.FRAGMENT.AddLoaiSanPham;
 import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
 import com.example.myapplication.FRAGMENT.FragmentProfile;
+import com.example.myapplication.FRAGMENT.GioHangFragment;
 import com.example.myapplication.FRAGMENT.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +72,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
                     case R.id.profile:
-                        fragment = new AddLoaiSanPham();
+                        fragment = new FragmentProfile();
+                        break;
+                    case R.id.cart:
+                        fragment = new GioHangFragment();
                         break;
 
 

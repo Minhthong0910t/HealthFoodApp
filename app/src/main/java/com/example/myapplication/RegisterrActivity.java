@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.SQLOutput;
@@ -65,11 +67,11 @@ public class RegisterrActivity extends AppCompatActivity {
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                            if(email.matches("^nhanvien+\\w+\\@+\\w+\\.+\\w+")){
-                             //  String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, String sdt, String diachi
-                                 NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",false,2,"chưa thêm số điện thoại", "chưa thêm địa chỉ");
+                             //String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, String sdt, String diachi
+                                 NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",false,2,1,"", "");
                                 db.collection("Users").document("nhanvien")
                                                 .collection("nhanviens")
-                                                        .document()
+                                                        .document(userid)
                                                                 .set(nv).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -80,7 +82,7 @@ public class RegisterrActivity extends AppCompatActivity {
                                     }
                                 });
                             }else {
-
+                               DatabaseReference reference = FirebaseDatabase.getInstance().getReference("KhachHangs");
                             }
 
                         }

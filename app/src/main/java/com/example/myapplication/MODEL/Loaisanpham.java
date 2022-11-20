@@ -6,15 +6,25 @@ import java.util.Map;
 public class Loaisanpham {
     private String maLoai;
     private String name;
+    private String imgURL;
     private Map<String, Sanpham> sanphams;
 
     public Loaisanpham() {
     }
 
-    public Loaisanpham(String maLoai,String name, Map<String, Sanpham> sanphams) {
+    public Loaisanpham(String maLoai, String name, String imgURL, Map<String, Sanpham> sanphams) {
         this.maLoai = maLoai;
         this.name = name;
+        this.imgURL = imgURL;
         this.sanphams = sanphams;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public String getName() {

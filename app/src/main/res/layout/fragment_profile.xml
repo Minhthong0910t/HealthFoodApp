@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="#ff0"
     tools:context=".FRAGMENT.FragmentProfile">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -19,26 +20,22 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="email"
+        android:hint="address"
         android:layout_marginTop="20dp"
-        android:id="@+id/ed_email_update"
+        android:id="@+id/ed_adress"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="name"
+        android:hint="phone"
         android:layout_marginTop="20dp"
-        android:id="@+id/ed_name_update"
+        android:id="@+id/ed_phone"
         />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_update"
         android:text="ok"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_update_email"
-        android:text="update mail"/>
+
 
 </LinearLayout>

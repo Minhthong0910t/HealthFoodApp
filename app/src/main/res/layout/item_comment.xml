@@ -27,43 +27,12 @@
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/img_avt"
                 />
-        <LinearLayout
-            android:id="@+id/layout_star"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_toRightOf="@id/img_avt"
-            android:layout_gravity="center_vertical">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="14dp"
-                android:src="@drawable/ic_star"/>
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="14dp"
-                android:src="@drawable/ic_star"/>
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="14dp"
-                android:src="@drawable/ic_star"/>
-            <ImageView
-                android:id="@+id/img_start4"
-                android:layout_width="20dp"
-                android:layout_height="14dp"
-                android:src="@drawable/ic_star"/>
-            <ImageView
-                android:id="@+id/img_start5"
-                android:layout_width="20dp"
-                android:layout_height="14dp"
-                android:src="@drawable/ic_star"/>
-        </LinearLayout>
-
             <TextView
                 android:id="@+id/tv_timeCMT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="100dp"
-                android:layout_below="@id/layout_star"
+                android:layout_below="@id/tv_name"
                 android:layout_toRightOf="@id/img_avt"
                 android:layout_marginTop="4dp"
                 android:textSize="12dp"

@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -104,8 +106,9 @@ public class AddSanPhamFragment extends Fragment {
 
                 Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
                 Map<String, Sanpham> map  = new HashMap<>();
-                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, 0, muri, null,lsp.getName(),3));
-                Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(),lsp.getName(), map);
+                
+                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, 0, muri, null,lsp.getName(),null,3));
+                Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(),lsp.getName(),lsp.getImgURL(), map);
 
                 db.collection("LoaiSanPhams").document(lsp.getMaLoai()).set(lspnew, SetOptions.merge())
                     .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -110,46 +110,4 @@ public class SanPhamNgangAdapter extends RecyclerView.Adapter<SanPhamNgangAdapte
     }
 
 
-    public void setFavoriteToServer(String namecompare, String masp_update, boolean status){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-
-                        Loaisanpham lsp = (Loaisanpham) document.toObject(Loaisanpham.class);
-                        if(lsp.getName().equals(namecompare)){
-                            db.collection("LoaiSanPhams").document(document.getId()).update("sanphams."+masp_update+".favorite", status);
-                        }
-                    }
-                }
-            }
-        });
-    }
-//    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-//        ImageView bmImage;
-//
-//        public DownloadImageTask(ImageView bmImage) {
-//            this.bmImage = bmImage;
-//        }
-//
-//        protected Bitmap doInBackground(String... urls) {
-//            String urldisplay = urls[0];
-//            Bitmap mIcon11 = null;
-//            try {
-//                InputStream in = new java.net.URL(urldisplay).openStream();
-//                mIcon11 = BitmapFactory.decodeStream(in);
-//            } catch (Exception e) {
-//
-//                e.printStackTrace();
-//            }
-//            return mIcon11;
-//        }
-//
-//        protected void onPostExecute(Bitmap result) {
-//            bmImage.setImageBitmap(result);
-//        }
-//    }
 }
