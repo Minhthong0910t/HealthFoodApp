@@ -14,25 +14,33 @@ public class Sanpham {
     private String imgURL;
     private Map<String, Comment> comments;
     private String ten_loai;
-
+    private String id_kh;
     private int starDanhGia;
 
     public Sanpham() {
     }
 
-    public Sanpham(String masp, String name, double price, int time_ship, String describe, int amount, int favorite, String imgURL, Map<String, Comment> comments,String ten_loai,int starDanhGia) {
+    public Sanpham(String masp, String name, double price, int time_ship, String describe, int luot_mua, int favorite, String imgURL, Map<String, Comment> comments, String ten_loai, String id_kh, int starDanhGia) {
         this.masp = masp;
         this.name = name;
         this.price = price;
         this.time_ship = time_ship;
         this.describe = describe;
-        this.luot_mua = amount;
+        this.luot_mua = luot_mua;
         this.favorite = favorite;
         this.imgURL = imgURL;
         this.comments = comments;
-        this.ten_loai  = ten_loai;
+        this.ten_loai = ten_loai;
+        this.id_kh = id_kh;
         this.starDanhGia = starDanhGia;
+    }
 
+    public String getId_kh() {
+        return id_kh;
+    }
+
+    public void setId_kh(String id_kh) {
+        this.id_kh = id_kh;
     }
 
     public String getMasp() {

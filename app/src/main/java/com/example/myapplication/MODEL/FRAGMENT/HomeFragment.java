@@ -2,7 +2,6 @@ package com.example.myapplication.MODEL.FRAGMENT;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,26 +11,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.myapplication.ADAPTER.DanhSachSanPhamGridAdapter;
 import com.example.myapplication.ADAPTER.LoaiSanPhamAdapter;
 import com.example.myapplication.ADAPTER.SanPhamAdapter;
 import com.example.myapplication.ADAPTER.SanPhamNgangAdapter;
-import com.example.myapplication.MODEL.ListenerFavorite;
 import com.example.myapplication.MODEL.Loaisanpham;
 import com.example.myapplication.MODEL.Sanpham;
 import com.example.myapplication.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -41,17 +32,15 @@ import java.util.Map;
 
 public class HomeFragment extends Fragment {
     ImageView img_boloc;
-
+    TextInputEditText ed_search_main;
     private String TAG = "homefragment";
+
+
 
     RecyclerView recyclerView_sanpham;
    SanPhamNgangAdapter sanPhamNgangAdapter;
-    TextInputEditText ed_search_main;
     List<Sanpham> sanPhamList;
 
-
-    RecyclerView recyclerSanPham;
-    SanPhamAdapter sanPhamAdapter;
 
 
     //loaisanpham
@@ -79,12 +68,12 @@ public class HomeFragment extends Fragment {
         ed_search_main = view.findViewById(R.id.ed_search);
         img_boloc = view.findViewById(R.id.img_boloc);
         recyclerView_sanpham = view.findViewById(R.id.recyrcle_danhSachSp_horizontal);
-        recyclerView_loaisp = view.findViewById(R.id.recycler_loaiSp);
-        recyclerSanPham = view.findViewById(R.id.recyrcle_Sp);
+        recyclerView_loaisp = view.findViewById(R.id.recyrcle_lsp);
+
         sanPhamList = new ArrayList<>();
         loaiSanPhams = new ArrayList<>();
-        recyclerSanPham.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        recyclerView_loaisp.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+
+        recyclerView_loaisp.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerView_sanpham.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
     }
     public void readDataLoaiSanPhamFromServer(){
@@ -101,7 +90,6 @@ public class HomeFragment extends Fragment {
                             return;
                         }
 
-
                         for (QueryDocumentSnapshot doc : value) {
 
                             Loaisanpham lsp = doc.toObject(Loaisanpham.class);
@@ -115,7 +103,7 @@ public class HomeFragment extends Fragment {
                             loaiSanPhams.add(lsp);
                         }
 
-                        Log.d(TAG, "list lsp " + sanPhamList.size());
+
                          loaiSanPhamAdapter = new LoaiSanPhamAdapter(getContext(), loaiSanPhams);
                           loaiSanPhamAdapter.notifyDataSetChanged();
                           recyclerView_loaisp.setAdapter(loaiSanPhamAdapter);
@@ -124,8 +112,6 @@ public class HomeFragment extends Fragment {
                         sanPhamNgangAdapter.notifyDataSetChanged();
                         recyclerView_sanpham.setAdapter(sanPhamNgangAdapter);
 
-                        sanPhamAdapter = new SanPhamAdapter(getContext(), sanPhamList);
-                        recyclerSanPham.setAdapter(sanPhamAdapter);
                     }
                 });
     }

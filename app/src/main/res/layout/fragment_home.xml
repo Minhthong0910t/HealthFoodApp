@@ -43,21 +43,9 @@
             android:src="@drawable/boloc"
             android:id="@+id/img_boloc"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_btn_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header_search">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_loaiSp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
     <LinearLayout
         android:id="@+id/layoutScroll"
-        android:layout_below="@id/layout_btn_filter"
+        android:layout_below="@id/header_search"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -109,7 +97,7 @@
                     android:numColumns="2"
                     android:verticalSpacing="10dp"
                     android:horizontalSpacing="10dp"
-                    android:id="@+id/recyrcle_Sp"
+                    android:id="@+id/recyrcle_lsp"
                     />
 
             </LinearLayout>

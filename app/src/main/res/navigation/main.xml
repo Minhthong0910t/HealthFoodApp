@@ -6,31 +6,23 @@
     app:startDestination="@id/id_HOME">
     <fragment
         android:id="@+id/id_HOME"
-        android:name="com.example.myapplication.MODEL.FRAGMENT.HomeFragment"
+        android:name="com.example.myapplication.FRAGMENT.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/id_adloaisp"
-        android:name="com.example.myapplication.MODEL.FRAGMENT.AddLoaiSanPham"
+        android:name="com.example.myapplication.FRAGMENT.AddLoaiSanPham"
         android:label="LoaiSanPhamFragment"
         tools:layout="@layout/them_loai_san_pham"/>
     <fragment
         android:id="@+id/id_addsanpham"
-        android:name="com.example.myapplication.MODEL.FRAGMENT.AddSanPhamFragment"
+        android:name="com.example.myapplication.FRAGMENT.AddSanPhamFragment"
         android:label="SanPhamFragment"
         tools:layout="@layout/them_san_pham"/>
     <fragment
         android:id="@+id/id_addyeuthich"
-        android:name="com.example.myapplication.MODEL.FRAGMENT.SanPhamYeuThichFragment"
+        android:name="com.example.myapplication.FRAGMENT.SanPhamYeuThichFragment"
         android:label="fragment_nhanvien"
         tools:layout="@layout/fragment_san_pham_yeu_thich" />
-    <activity
-        android:id="@+id/id_dangnhap"
-        android:name="com.example.myapplication.LoginActivity"
-        android:label="LoginActivity" />
-    <activity
-        android:id="@+id/id_dangxuat"
-        android:name="com.example.myapplication.LoginActivity"
-        android:label="LoginActivity" />
 
 </navigation>

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.MODEL.Admin;
+import com.example.myapplication.MODEL.KhachHang;
 import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.MODEL.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +20,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.SQLOutput;
@@ -73,11 +76,11 @@ TextInputLayout til_username,til_password,til_enterpassword, til_ed_email;
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                            if(email.matches("^nhanvien+\\w+\\@+\\w+\\.+\\w+")){
-                             //  String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, String sdt, String diachi
-                                 NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",false,2,"chưa thêm số điện thoại", "chưa thêm địa chỉ");
+                             //String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, String sdt, String diachi
+                                 NhanVien nv = new NhanVien(userid, ed_name.getText().toString(), email,pass,"default",false,2,1,"", "");
                                 db.collection("Users").document("nhanvien")
                                                 .collection("nhanviens")
-                                                        .document()
+                                                        .document(userid)
                                                                 .set(nv).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -88,6 +91,19 @@ TextInputLayout til_username,til_password,til_enterpassword, til_ed_email;
                                     }
                                 });
                             }else {
+                               DatabaseReference reference = FirebaseDatabase.getInstance().getReference("KhachHangs");
+                               //String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, List<DonHang> list
+                               KhachHang kh = new KhachHang(userid, ed_name.getText().toString(), email,pass,"default",false,3,1,"", "");
+                               reference.push().setValue(kh).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                   @Override
+                                   public void onComplete(@NonNull Task<Void> task) {
+                                       if(task.isSuccessful()){
+                                           Toast.makeText(RegisterrActivity.this, "dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                                           startActivity(new Intent(RegisterrActivity.this, MainActivity.class));
+                                       }
+                                   }
+                               });
+
 
                             }
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.MODEL.FRAGMENT;
+package com.example.myapplication.FRAGMENT;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -47,10 +47,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AddSanPhamFragment extends Fragment {
     //view
     ImageView btn_upload,img_sp;
-    int temp=0;
+
     EditText ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta;
     ProgressDialog progressDialog;
     Button btn_add;
@@ -96,40 +98,37 @@ public class AddSanPhamFragment extends Fragment {
 
                 String masp = ed_masp.getText().toString();
                 String name = ed_ten.getText().toString();
+                double price = Double.parseDouble(ed_gia.getText().toString());
                 String describe = ed_mo_ta.getText().toString();
+                int time_ship = Integer.parseInt(ed_time.getText().toString());
 
-                if (validate(name, masp, describe)) {
-                    double price = Double.parseDouble(ed_gia.getText().toString());
-                    int time_ship = Integer.parseInt(ed_time.getText().toString());
-                    Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
-                    Map<String, Sanpham> map = new HashMap<>();
-                    map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, 0, muri, null, lsp.getName(), 3));
-                    Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(), lsp.getName(), map);
+                Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
+                Map<String, Sanpham> map  = new HashMap<>();
+                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, 0, muri, null,lsp.getName(),3));
+                Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(),lsp.getName(), map);
 
-                    db.collection("LoaiSanPhams").document(lsp.getMaLoai()).set(lspnew, SetOptions.merge())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    progressDialog.dismiss();
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(getContext(), "ghi du lieu thanh cong", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getContext(), "ghi that bai", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                db.collection("LoaiSanPhams").document(lsp.getMaLoai()).set(lspnew, SetOptions.merge())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        progressDialog.dismiss();
+                        if(task.isSuccessful()) {
+                            Toast.makeText(getContext(), "ghi du lieu thanh cong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "ghi that bai", Toast.LENGTH_SHORT).show();
+                            }
+                        })     ;
 
-                }
             }
         });
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 openImg();
             }
         });
@@ -219,34 +218,4 @@ public class AddSanPhamFragment extends Fragment {
 
         }
     }
-
-
-    private boolean validate(String ten , String masp, String mota){
-
-        if(ten.isEmpty()){
-            ed_ten.setError("Tên sản phẩm không đuọc để trống");
-            temp++;
-        }else{
-            ed_ten.setError("");
-        }
-
-
-        if(masp.length()==0){
-            ed_masp.setError("Mã sản phẩmkhông được để trống");
-            temp++;
-        }else{
-            ed_masp.setError("");
-        }
-
-        if(mota.length()==0){
-            ed_mo_ta.setError("Mô tả không được để trống");
-            temp++;
-        }else{
-            ed_mo_ta.setError("");
-        }
-
-        return false;
-    }
-
-
 }

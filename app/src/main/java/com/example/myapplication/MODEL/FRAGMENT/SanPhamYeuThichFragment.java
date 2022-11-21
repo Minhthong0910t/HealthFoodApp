@@ -1,4 +1,4 @@
-package com.example.myapplication.MODEL.FRAGMENT;
+package com.example.myapplication.FRAGMENT;
 
 import android.os.Bundle;
 

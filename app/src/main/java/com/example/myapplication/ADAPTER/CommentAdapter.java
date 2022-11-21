@@ -2,6 +2,7 @@ package com.example.myapplication.ADAPTER;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.ChiTietSanPham;
+import com.example.myapplication.LoginActivity;
 import com.example.myapplication.MODEL.Comment;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -51,7 +56,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
         holder.tv_time.setText(cmt.getTime_comment());
         holder.tv_comment.setText(cmt.getContent());
 
-
     }
 
     @Override
@@ -64,15 +68,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewhold
     public class Viewholder extends RecyclerView.ViewHolder {
         CircleImageView img_avt;
         TextView tv_name, tv_time, tv_comment;
-        ImageView img_startfour, img_startfive;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             img_avt = itemView.findViewById(R.id.img_avt);
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_time = itemView.findViewById(R.id.tv_timeCMT);
             tv_comment = itemView.findViewById(R.id.tv_comment);
-            img_startfive = itemView.findViewById(R.id.img_start5);
-            img_startfour = itemView.findViewById(R.id.img_start4);
+
         }
     }
 }
