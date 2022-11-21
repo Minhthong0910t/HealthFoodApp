@@ -29,6 +29,7 @@ import com.example.myapplication.ADAPTER.CommentAdapter;
 
 import com.example.myapplication.MODEL.Comment;
 import com.example.myapplication.MODEL.GioHang;
+import com.example.myapplication.MODEL.KhachHang;
 import com.example.myapplication.MODEL.Loaisanpham;
 import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.MODEL.User;
@@ -36,9 +37,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -128,53 +131,17 @@ CommentAdapter commentAdapter;
             @Override
             public void onClick(View view) {
                 //kiem tra nhap trong
-                if(ed_cmt.getText().toString().equals("")){
+                String content = ed_cmt.getText().toString();
+                if(content.equals("")){
                     Toast.makeText(ChiTietSanPham.this, "vui long nhap binh luan", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //kiem tra dang nhap
-                if(usercurent==null){
-                    finish();
-                    startActivity(new Intent(ChiTietSanPham.this, LoginActivity.class));
+                if(usercurent.getEmail().matches("^nhanvien+\\w+\\@+\\w+\\.+\\w+")){
+                    Comments(content, 2, maSP);
                 }else {
-                    String iduser  = usercurent.getUid();
-                    String content = ed_cmt.getText().toString();
-                    db.collection("Users").document("nhanvien")
-                            .collection("nhanviens")
-                            .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                @Override
-                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
-                                    if (e != null) {
-                                        return;
-                                    }
-                                    for(QueryDocumentSnapshot document : value){
-                                        User usr = document.toObject(User.class);
-                                        if(usr.getId().equals(iduser)){
-                                            Comment cm = new Comment();
-                                            cm.setId_comment(maSP);
-                                            cm.setId_user(iduser);
-                                            cm.setName_user(usr.getName());
-                                            cm.setImg_user("default");
-                                            cm.setContent(content);
-                                            String timeCureent = "";
-                                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy/MM/dd HH:mm" );
-                                                LocalDateTime now = LocalDateTime.now();
-                                                timeCureent = dtf.format(now);
-                                                cm.setTime_comment(timeCureent);
-                                            }
-                                            cm.setSoSaoDanhGia(5);
-                                            db.collection("Comments").document(content).set(cm).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    ed_cmt.setText("");
-                                                }
-                                            });
-                                        }
-                                    }
-                                }
-                            });
+                    Comments(content, 3, maSP);
                 }
+
             }
         });
 
@@ -286,5 +253,92 @@ CommentAdapter commentAdapter;
 
 
 
+    }
+    private void Comments(String nd, int loaiUser, String maSP){
+        FirebaseUser usercurent = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //kiem tra dang nhap
+        if(usercurent==null){
+            finish();
+            startActivity(new Intent(ChiTietSanPham.this, LoginActivity.class));
+        }else {
+            if(loaiUser==2){
+                String iduser  = usercurent.getUid();
+                String content = ed_cmt.getText().toString();
+                db.collection("Users").document("nhanvien")
+                        .collection("nhanviens")
+                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                                if (e != null) {
+                                    return;
+                                }
+                                for(QueryDocumentSnapshot document : value){
+                                    User usr = document.toObject(User.class);
+                                    if(usr.getId().equals(iduser)){
+                                        Comment cm = new Comment();
+                                        cm.setId_comment(maSP);
+                                        cm.setId_user(iduser);
+                                        cm.setName_user(usr.getName());
+                                        cm.setImg_user("default");
+                                        cm.setContent(content);
+                                        String timeCureent = "";
+                                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy/MM/dd HH:mm" );
+                                            LocalDateTime now = LocalDateTime.now();
+                                            timeCureent = dtf.format(now);
+                                            cm.setTime_comment(timeCureent);
+                                        }
+                                        cm.setSoSaoDanhGia(5);
+                                        db.collection("Comments").document(content).set(cm).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                ed_cmt.setText("");
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+            }else if(loaiUser==3){
+                DatabaseReference referencekhs = FirebaseDatabase.getInstance().getReference("KhachHangs");
+                referencekhs.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            KhachHang kh = dataSnapshot.getValue(KhachHang.class);
+                            if(kh.getId().equals(usercurent.getUid())){
+                                Comment cmt = new Comment();
+                                cmt.setId_comment(maSP);
+                                cmt.setId_user(kh.getId());
+                                cmt.setName_user(kh.getName());
+                                cmt.setImg_user("default");
+                                cmt.setContent(nd);
+                                String timeCureent = "";
+                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern( "yyyy/MM/dd HH:mm" );
+                                    LocalDateTime now = LocalDateTime.now();
+                                    timeCureent = dtf.format(now);
+                                    cmt.setTime_comment(timeCureent);
+                                }
+                                cmt.setSoSaoDanhGia(5);
+                                db.collection("Comments").document(nd).set(cmt).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        ed_cmt.setText("");
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+        }
     }
 }

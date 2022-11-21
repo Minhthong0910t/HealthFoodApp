@@ -29,5 +29,27 @@
             android:text="TEN LOAI SP"
             android:textStyle="bold"
             />
+
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/img_deleLoai"
+            android:layout_width="26dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_delete" />
+        <ImageView
+            android:id="@+id/img_editLoai"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_edit"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
