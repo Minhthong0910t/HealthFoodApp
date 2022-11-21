@@ -9,35 +9,44 @@
     <ImageView
         android:layout_width="280dp"
         android:layout_height="201dp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/logoo" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_ed_username"
+        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+       android:gravity="center"
+        app:startIconDrawable="@drawable/custom_name_focus">
 
-    <EditText
-        android:id="@+id/ed_username"
-        android:layout_width="304dp"
-        android:layout_height="50dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:layout_gravity="center"
-        android:drawableStart="@drawable/custom_name_focus"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/custom_input"
-        android:hint="Email"
-        android:textSize="20dp" />
-    <EditText
-        android:id="@+id/ed_password"
-        android:layout_width="304dp"
-        android:layout_height="50dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:layout_gravity="center"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_pass"
-        android:layout_marginTop="10dp"
-        android:inputType="textPassword"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_username"
+            android:layout_width="302dp"
+            android:layout_height="60dp"
+             android:background="@drawable/custom_input"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_height="wrap_content"
+        android:id="@+id/til_ed_password"
+        app:passwordToggleEnabled="true"
         android:hint="Password"
-        android:textSize="20dp" />
+        android:gravity="center"
+        app:startIconDrawable="@drawable/custom_pass">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_password"
+            android:layout_width="302dp"
+            android:layout_height="60dp"
+            app:passwordToggleEnabled="true"
+            android:background="@drawable/custom_input"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
@@ -94,4 +103,5 @@
             android:src="@drawable/apple" />
 
     </LinearLayout>
+
 </LinearLayout>

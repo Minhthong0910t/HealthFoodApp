@@ -1,9 +1,5 @@
 package com.example.myapplication;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.view.GravityCompat;
@@ -15,28 +11,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 
 
-import com.bumptech.glide.Glide;
-import com.example.myapplication.FRAGMENT.AddLoaiSanPham;
-import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
-import com.example.myapplication.FRAGMENT.FragmentProfile;
-import com.example.myapplication.FRAGMENT.HomeFragment;
+import com.example.myapplication.MODEL.FRAGMENT.AddLoaiSanPham;
+import com.example.myapplication.MODEL.FRAGMENT.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     public  ChipNavigationBar chipNavigationBar;

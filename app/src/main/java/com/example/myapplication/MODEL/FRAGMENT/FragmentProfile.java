@@ -1,4 +1,4 @@
-package com.example.myapplication.FRAGMENT;
+package com.example.myapplication.MODEL.FRAGMENT;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
