@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -41,7 +42,8 @@ public class UpdateSanpham extends AppCompatActivity {
     Button btn_update;
     ImageView  img_sanphamUp,btn_upload;
     List<Loaisanpham> loaisanphamList;
-    SpinnerLoaiSanPhamAdapter spinnerLoaiSanPhamAdapter;
+
+
     ProgressDialog progressDialog;
 
     //store
@@ -65,7 +67,7 @@ public class UpdateSanpham extends AppCompatActivity {
         muri = intent.getStringExtra("hinhAnhUP");
         String moTa = intent.getStringExtra("moTaUP");
         int timeShip = intent.getIntExtra("timeUP", 0);
-        String tenLoai =  intent.getStringExtra("tenLoaiUP");
+        String maLoai =  intent.getStringExtra("MaLoai");
 
 
         Glide.with(this).load(muri).into(img_sanphamUp);
@@ -74,10 +76,33 @@ public class UpdateSanpham extends AppCompatActivity {
         ed_giaUp.getEditText().setText(dgia + "");
         tv_maspUp.getEditText().setText(maSP);
         ed_timeshipUp.getEditText().setText(timeShip + "");
-        tv_tenLoai.getEditText().setText(tenLoai);
+        tv_tenLoai.getEditText().setText(maLoai);
 
 
+//        db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if(task.isSuccessful()){
+//                    for(QueryDocumentSnapshot doc :task.getResult()){
+//                        Loaisanpham lsp = doc.toObject(Loaisanpham.class);
+//                        loaisanphamSetSpinner.add(lsp);
+//                    }
+//
+//                    spinnerLoaiSanPhamAdapter = new SpinnerLoaiSanPhamAdapter(UpdateSanpham.this, loaisanphamSetSpinner);
+//                    spinnerTenLoai.setAdapter(spinnerLoaiSanPhamAdapter);
+//                    for(int i = 0; i < loaisanphamSetSpinner.size(); i++){
+//                        if(loaisanphamSetSpinner.get(i).getMaLoai().equals(maLoai)){
+//                            spinnerTenLoai.setSelection(i);
+//                        }
+//                    }
+//                }
+//            }
+//        });
 
+//        SpinnerLoaiSanPhamAdapter lspAdapter = (SpinnerLoaiSanPhamAdapter) spinnerTenLoai.getAdapter();
+//        for(int i = 0 ;i< lspAdapter.getCount(); i++){
+//            Log.d("UPDATE LSP", "onCreate: " + lspAdapter.getItem(i));
+//        }
 
         btn_upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +115,7 @@ public class UpdateSanpham extends AppCompatActivity {
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                progressDialog.show();
                 String nameSP_up = ed_nameUp.getEditText().getText().toString();
                 double priceSP_up = Double.parseDouble(ed_giaUp.getEditText().getText().toString());
                 String describeSP_up = ed_motaUp.getEditText().getText().toString();
@@ -107,17 +132,20 @@ public class UpdateSanpham extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Loaisanpham lsp = document.toObject(Loaisanpham.class);
-                                if(lsp.getName().equals(tenLoai)){
+                                if(lsp.getMaLoai().equals(maLoai)){
                                     db.collection("LoaiSanPhams").document(document.getId())
                                             .update("sanphams."+maSP+".name",nameSP_up,
                                                     "sanphams."+maSP+".price",priceSP_up,
                                                     "sanphams."+maSP+".time_ship",time_shipSP_up,
                                                     "sanphams."+maSP+".describe",describeSP_up,
-                                                    "sanphams."+maSP+".imgURL",muri)
+                                                    "sanphams."+maSP+".imgURL",muri
+                                                    )
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
+                                                    progressDialog.dismiss();
                                                     if (task.isSuccessful()){
+
                                                         Toast.makeText(getBaseContext(), "Update sản phẩm thành công", Toast.LENGTH_SHORT).show();
                                                         onBackPressed();
                                                     }
@@ -149,7 +177,10 @@ public class UpdateSanpham extends AppCompatActivity {
         btn_upload=findViewById(R.id.btn_upload);
         tv_tenLoai=findViewById(R.id.tv_tenLoai);
         loaisanphamList=new ArrayList<>();
-        progressDialog = new ProgressDialog(getApplicationContext());
+
+        //spinner
+
+        progressDialog = new ProgressDialog(this);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
 
@@ -187,7 +218,7 @@ public class UpdateSanpham extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Uri dowloaduri = (Uri) task.getResult();
                         muri = dowloaduri.toString();
-                        Glide.with(UpdateSanpham.this).load(muri).into(img_sanphamUp);
+                        Glide.with(getApplicationContext()).load(muri).into(img_sanphamUp);
                     }
                     else {
                         Toast.makeText(getBaseContext(), "failed!", Toast.LENGTH_SHORT).show();

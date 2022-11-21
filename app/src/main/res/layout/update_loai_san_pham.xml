@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <TextView
+
         android:background="#FFC107"
         android:layout_width="match_parent"
         android:text="UPDATE LOẠI SẢN PHẨM"
@@ -13,6 +14,26 @@
         android:textSize="25dp"
         android:textColor="@color/black"
         android:layout_height="@dimen/height_tv"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+
+    <ImageView
+        android:id="@+id/img_LoaisanphamUP"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="@dimen/magin_update"
+        android:src="@drawable/img1" />
+    <ImageView
+        android:id="@+id/btn_uploadLoai"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/magin_update"
+        android:src="@drawable/up_file" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_maLoai"
         android:layout_width="match_parent"
@@ -43,29 +64,16 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <ImageView
-        android:id="@+id/img_LoaisanphamUP"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="@dimen/magin_update"
-        android:src="@drawable/img1" />
-    <ImageView
-        android:id="@+id/btn_uploadLoai"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="@dimen/magin_update"
-        android:src="@drawable/up_file" />
     <Button
         android:layout_gravity="center"
         android:id="@+id/btn_updateLoai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ece7e3"
-        android:textColor="#8b4513"
+        android:backgroundTint="#FF9800"
+        android:textColor="#f000"
         android:textSize="16dp"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/magin_botom"
         android:text="Update"/>
+    </LinearLayout>
 </LinearLayout>

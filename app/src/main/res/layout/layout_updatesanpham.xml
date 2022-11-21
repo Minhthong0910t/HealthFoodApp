@@ -4,6 +4,7 @@
     android:background="@drawable/img"
     android:orientation="vertical"
     android:layout_height="match_parent">
+
     <TextView
         android:background="#FFC107"
         android:layout_width="match_parent"

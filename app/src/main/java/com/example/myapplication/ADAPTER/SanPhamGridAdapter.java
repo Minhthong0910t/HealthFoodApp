@@ -114,7 +114,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteSanpham(sp.getMasp(), sp.getTen_loai());
+                deleteSanpham(sp.getMasp(), sp.getMaLoai());
 
             }
         });
@@ -130,10 +130,8 @@ public class SanPhamGridAdapter extends BaseAdapter {
                 intent.putExtra("hinhAnhUP", sp.getImgURL());
                 intent.putExtra("moTaUP", sp.getDescribe());
                 intent.putExtra("timeUP", sp.getTime_ship());
-                intent.putExtra("tenLoaiUP", sp.getTen_loai());
-//                intent.putExtra("potion",position);
-//                intent.putExtra("index",);
-                Log.d(TAG, "onClick: ");
+                intent.putExtra("MaLoai", sp.getMaLoai());
+
 
                 context.startActivity(intent);
 
@@ -154,7 +152,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
                 intent.putExtra("star", sp.getStarDanhGia());
                 intent.putExtra("favorite", sp.getFavorite());
                 intent.putExtra("time", sp.getTime_ship());
-                intent.putExtra("tenLoai", sp.getTen_loai());
+                intent.putExtra("tenLoai", sp.getMaLoai());
 
 
                 context.startActivity(intent);
@@ -163,7 +161,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
         return view;
     }
 
-    public void deleteSanpham(String maspD,String tenloaiD) {
+    public void deleteSanpham(String maspD,String maLoai) {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -189,13 +187,14 @@ public class SanPhamGridAdapter extends BaseAdapter {
                                 docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                     @Override
                                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                                        if (lsp.getName().equals(tenloaiD)) {
+                                        if (lsp.getMaLoai().equals(maLoai)) {
                                             Map<String, Object> updates = new HashMap<>();
                                             updates.put("sanphams."+maspD, FieldValue.delete());
                                             docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()) {
+                                                        Toast.makeText(context, "xoa thanh cong", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {

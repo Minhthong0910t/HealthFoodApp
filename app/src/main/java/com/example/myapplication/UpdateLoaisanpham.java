@@ -39,8 +39,7 @@ public class UpdateLoaisanpham extends AppCompatActivity {
     TextInputLayout tv_maLoai;
     Button btn_updateLoai;
     ImageView img_LoaisanphamUp,btn_upload;
-    List<Loaisanpham> loaisanphamList;
-    SpinnerLoaiSanPhamAdapter spinnerLoaiSanPhamAdapter;
+
     ProgressDialog progressDialog;
 
     //store
@@ -80,7 +79,7 @@ public class UpdateLoaisanpham extends AppCompatActivity {
         btn_updateLoai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                progressDialog.show();
                 String nameLoaiSP_up = ed_nameLoai.getEditText().getText().toString();
 
                 db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -99,7 +98,9 @@ public class UpdateLoaisanpham extends AppCompatActivity {
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
+                                                    progressDialog.dismiss();
                                                     if (task.isSuccessful()){
+
                                                         Toast.makeText(getBaseContext(), "Update Loại sản phẩm thành công", Toast.LENGTH_SHORT).show();
                                                         onBackPressed();
                                                     }
@@ -121,6 +122,7 @@ public class UpdateLoaisanpham extends AppCompatActivity {
         }
 
     private void anhXaView() {
+        progressDialog = new ProgressDialog(this);
         ed_nameLoai = findViewById(R.id.ed_nameLoai);
         tv_maLoai = findViewById(R.id.tv_maLoai);
         img_LoaisanphamUp=findViewById(R.id.img_LoaisanphamUP);

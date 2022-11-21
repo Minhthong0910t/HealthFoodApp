@@ -131,6 +131,11 @@ CommentAdapter commentAdapter;
             @Override
             public void onClick(View view) {
                 //kiem tra nhap trong
+                if(usercurent==null){
+                    finish();
+                    startActivity(new Intent(ChiTietSanPham.this, LoginActivity.class));
+                    return;
+                }
                 String content = ed_cmt.getText().toString();
                 if(content.equals("")){
                     Toast.makeText(ChiTietSanPham.this, "vui long nhap binh luan", Toast.LENGTH_SHORT).show();
