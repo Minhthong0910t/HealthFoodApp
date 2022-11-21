@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.MODEL.Admin;
+import com.example.myapplication.MODEL.KhachHang;
 import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.MODEL.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,6 +84,19 @@ public class RegisterrActivity extends AppCompatActivity {
                                 });
                             }else {
                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("KhachHangs");
+                               //String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, List<DonHang> list
+                               KhachHang kh = new KhachHang(userid, ed_name.getText().toString(), email,pass,"default",false,3,1,"", "");
+                               reference.push().setValue(kh).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                   @Override
+                                   public void onComplete(@NonNull Task<Void> task) {
+                                       if(task.isSuccessful()){
+                                           Toast.makeText(RegisterrActivity.this, "dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                                           startActivity(new Intent(RegisterrActivity.this, MainActivity.class));
+                                       }
+                                   }
+                               });
+
+
                             }
 
                         }

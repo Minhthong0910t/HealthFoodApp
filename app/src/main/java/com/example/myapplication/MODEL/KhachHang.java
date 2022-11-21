@@ -3,28 +3,38 @@ package com.example.myapplication.MODEL;
 import java.util.List;
 
 public class KhachHang extends User{
-    List<DonHang> list;
+    private String sdt, diachi;
 
-    public KhachHang(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, List<DonHang> list) {
+    public KhachHang(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, String sdt, String diachi) {
         super(id, name, email, password, imgURL, trangThaiTym, loaiUser, soSaoDanhGia);
-        this.list = list;
+        this.sdt = sdt;
+        this.diachi = diachi;
+
     }
 
-    public List<DonHang> getList() {
-        return list;
+    public String getSdt() {
+        return sdt;
     }
 
-    public void setList(List<DonHang> list) {
-        this.list = list;
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
     }
+
+    public String getDiachi() {
+        return diachi;
+    }
+
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
+    }
+
+
 
     public KhachHang() {
         super();
     }
 
-    public KhachHang(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia) {
-        super(id, name, email, password, imgURL, trangThaiTym, loaiUser, soSaoDanhGia);
-    }
+
 
     @Override
     public int getSoSaoDanhGia() {

@@ -44,7 +44,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.VIewhold
 
         //Log.d(TAG, "ghadapter: " + gh.getTenLoaiSanPham());
         Glide.with(context).load(gh.getHinhAnh()).into(holder.img_sp);
-        holder.tvTenLoai.setText(gh.getTenLoaiSanPham());
         holder.tvTenSp.setText(gh.getTenSanPham());
         holder.tvGia.setText("gia: " + gh.getDonGia());
         holder.tvSoLuong.setText("so luong: " + gh.getSoLuong());

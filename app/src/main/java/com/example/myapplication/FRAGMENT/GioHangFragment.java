@@ -18,16 +18,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.ADAPTER.GioHangAdapter;
+import com.example.myapplication.ADAPTER.SpinnerAddressAdapter;
 import com.example.myapplication.MODEL.DonHang;
 import com.example.myapplication.MODEL.GioHang;
+import com.example.myapplication.MODEL.KhachHang;
 import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,11 +53,18 @@ public class GioHangFragment extends Fragment {
 
 String TAG  = "GIOHANG";
 private View view;
-TextView tv_tongTien;
+TextView tv_tongTien, tv_phone;
+
 Button btn_mua;
 RecyclerView recyclerView;
 GioHangAdapter gioHangAdapter;
 List<GioHang> list;
+
+
+//spinner kh
+Spinner spin_Adress;
+SpinnerAddressAdapter addressAdapter;
+List<KhachHang> khachHangs;
     DatabaseReference reference;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,43 +102,61 @@ List<GioHang> list;
             }
         });
         FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DatabaseReference  referencekh = FirebaseDatabase.getInstance().getReference("KhachHangs");
+        referencekh.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    KhachHang kh = dataSnapshot.getValue(KhachHang.class);
+                    if(!kh.getDiachi().equals("") && kh.getId().equals(userCurrent.getUid())){
+                        khachHangs.add(kh);
+                    }else {
+                        Toast.makeText(getContext(), "vui long them dia chi", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if(kh.getSdt().equals("")){
+                        Toast.makeText(getContext(), "vui long them so dien thoai", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    tv_phone.setText(kh.getSdt());
+                }
+
+                addressAdapter = new SpinnerAddressAdapter(getContext(), khachHangs);
+                spin_Adress.setAdapter(addressAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         btn_mua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.collection("Users").document("nhanvien")
-                        .collection("nhanviens").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                if (error != null) {
-                                    return;
-                                }
-                                for(QueryDocumentSnapshot doc:value){
-                                    NhanVien nv = doc.toObject(NhanVien.class);
-                                    if(nv.getId().equals(userCurrent.getUid())){
 
-                                        DonHang dh = new DonHang();
-                                        dh.setName(nv.getName());
-                                        dh.setTongTien(Double.parseDouble(tv_tongTien.getText().toString()));
-                                        dh.setSanphams(list);
+              DatabaseReference  referencedh =  FirebaseDatabase.getInstance().getReference("DonHangs");
 
-                                        if(nv.getSdt().equals("")){
-                                            Toast.makeText(getContext(), "vui long them so dien thoai", Toast.LENGTH_SHORT).show();
-                                            return;
+                DonHang dh = new DonHang();
+              dh.setName(userCurrent.getDisplayName());
+              dh.setTongTien(Double.parseDouble(tv_tongTien.getText().toString()));
+              KhachHang kh = (KhachHang) spin_Adress.getSelectedItem();
+              if(kh==null)
+                  return;
+              dh.setDiaChi(kh.getDiachi());
+              dh.setSdt(tv_phone.getText().toString());
+              dh.setSanphams(list);
 
-                                        }if (nv.getDiachi().equals("")){
-                                            Toast.makeText(getContext(), "vui long them dia chi", Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }
-                                        dh.setDiaChi(nv.getDiachi());
-                                        dh.setSdt(nv.getSdt());
-                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("DonHangs");
-                                        reference.child(nv.getId())
-                                                .setValue(dh);
-                                    }
-                                }
-                            }
-                        });
+              referencedh.push().setValue(dh).addOnCompleteListener(new OnCompleteListener<Void>() {
+                  @Override
+                  public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(getContext(), "Gui don hang thanh cong", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                  }
+              });
+
             }
         });
         return view;
@@ -137,6 +166,10 @@ List<GioHang> list;
         list = new ArrayList<>();
         tv_tongTien = view.findViewById(R.id.tv_tong_tien);
         btn_mua = view.findViewById(R.id.btn_dat_hang);
+        spin_Adress = view.findViewById(R.id.spinner_diachi);
+        tv_phone = view.findViewById(R.id.tv_sdt);
+
+        khachHangs = new ArrayList<>();
     }
 
 }

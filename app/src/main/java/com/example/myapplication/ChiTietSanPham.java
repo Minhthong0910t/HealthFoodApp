@@ -227,7 +227,7 @@ CommentAdapter commentAdapter;
                     return;
                 }
                 gh.setIdUser(usercurent.getUid());
-                gh.setTenLoaiSanPham(tenLoai);
+
                 gh.setTenSanPham(name);
                 gh.setHinhAnh(urlIMG);
                 gh.setSoLuong(Integer.parseInt(ed_soluong.getText().toString()));
@@ -239,7 +239,7 @@ CommentAdapter commentAdapter;
                         .push().setValue(gh, new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-
+                                Toast.makeText(ChiTietSanPham.this, "da them vao gio hang", Toast.LENGTH_SHORT).show();
                             }
                         });
 
