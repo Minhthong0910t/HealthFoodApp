@@ -9,32 +9,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.ChiTietSanPham;
-import com.example.myapplication.MODEL.Comment;
-import com.example.myapplication.MODEL.Loaisanpham;
 import com.example.myapplication.MODEL.Sanpham;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewholder> {
     private Context context;
     private List<Sanpham> list;
+    ImageView img_delete;
 
     public SanPhamAdapter(Context context, List<Sanpham> list) {
         this.context = context;
@@ -70,7 +58,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhold
                 holder.tv_mo_Ta.setText(sp.getDescribe());
             }
         }
-        holder.img_delete.setOnClickListener(new View.OnClickListener() {
+        img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -112,7 +100,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhold
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        ImageView img_sp, img_start_four, img_start_five,img_Edit, img_delete;
+        ImageView img_sp, img_start_four, img_start_five,img_Edit;
         TextView tv_ten,tv_mo_Ta, tv_gia, tv_ten_loai,tv_luotBan;
         CardView itemsp;
         public Viewholder(@NonNull View itemView) {
@@ -121,7 +109,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhold
             img_start_four = itemView.findViewById(R.id.img_start4);
             img_start_five = itemView.findViewById(R.id.img_start5);
             img_Edit = itemView.findViewById(R.id.img_edit);
-            img_delete = itemView.findViewById(R.id.img_dele);
+            img_delete = itemView.findViewById(R.id.img_deleSP);
             tv_ten = itemView.findViewById(R.id.tv_ten_sp);
             tv_mo_Ta = itemView.findViewById(R.id.tv_mota);
             tv_gia = itemView.findViewById(R.id.tv_gia);
