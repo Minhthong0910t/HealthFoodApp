@@ -1,6 +1,10 @@
 package com.example.myapplication.MODEL;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class KhachHang extends User{
     private String sdt, diachi;
@@ -114,5 +118,14 @@ public class KhachHang extends User{
     @Override
     public void setLoaiUser(int loaiUser) {
         super.setLoaiUser(loaiUser);
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("diachi", diachi);
+        result.put("sdt", sdt);
+
+        return result;
     }
 }

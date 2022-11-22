@@ -13,11 +13,11 @@ import com.example.myapplication.R;
 import java.util.List;
 
 public class SpinnerAddressAdapter extends BaseAdapter {
-    private Context context;
+
     private List<KhachHang> list;
 
-    public SpinnerAddressAdapter(Context context, List<KhachHang> list) {
-        this.context = context;
+    public SpinnerAddressAdapter( List<KhachHang> list) {
+
         this.list = list;
     }
 
@@ -43,7 +43,7 @@ public class SpinnerAddressAdapter extends BaseAdapter {
         Viewholder holder;
         if(view==null){
             holder = new Viewholder();
-            view = LayoutInflater.from(context).inflate(R.layout.item_spinner_address,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_spinner_address,viewGroup,false);
             holder.tv_address = view.findViewById(R.id.tv_Address);
             view.setTag(holder);
         }else

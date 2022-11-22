@@ -94,7 +94,7 @@ TextInputLayout til_username,til_password,til_enterpassword, til_ed_email;
                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("KhachHangs");
                                //String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, List<DonHang> list
                                KhachHang kh = new KhachHang(userid, ed_name.getText().toString(), email,pass,"default",false,3,1,"", "");
-                               reference.push().setValue(kh).addOnCompleteListener(new OnCompleteListener<Void>() {
+                               reference.child(userCurent.getUid()).setValue(kh).addOnCompleteListener(new OnCompleteListener<Void>() {
                                    @Override
                                    public void onComplete(@NonNull Task<Void> task) {
                                        if(task.isSuccessful()){
