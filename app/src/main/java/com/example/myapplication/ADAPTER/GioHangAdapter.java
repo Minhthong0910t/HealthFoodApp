@@ -7,14 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.MODEL.GioHang;
 import com.example.myapplication.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.List;
 
@@ -65,6 +74,46 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.VIewhold
             tvGia = itemView.findViewById(R.id.tv_gia);
             tvSoLuong = itemView.findViewById(R.id.tv_soluong);
 
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("GioHangs");
+                    reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            for(DataSnapshot dataSnapshot : task.getResult().getChildren()){
+
+                                GioHang gh = dataSnapshot.getValue(GioHang.class);
+                                if(gh.getTenSanPham().equals(list.get(getAdapterPosition()).getTenSanPham())){
+                                   // Log.d(TAG, "onComplete: " + gh.getTenSanPham());
+                                    reference.child(dataSnapshot.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                           if(task.isSuccessful()){
+                                               Toast.makeText(context, "xoa thanh cong khoi gio hang", Toast.LENGTH_SHORT).show();
+                                           }
+                                        }
+                                    });
+
+                                }
+                            }
+
+
+                        }
+                    });
+//                    reference.child(list.get(getAdapterPosition()).).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if(task.isSuccessful()){
+//                                Snackbar snackbar = Snackbar.make(context,view,"Xoa thanh cong khoi gio hang",2000);
+//                                snackbar.setAction("ok", null).show();
+//                                Toast.makeText(context, "xóa thành công khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+                    return false;
+                }
+            });
         }
     }
 }
