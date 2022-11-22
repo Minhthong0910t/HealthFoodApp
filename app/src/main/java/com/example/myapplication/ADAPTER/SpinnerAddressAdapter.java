@@ -1,6 +1,5 @@
 package com.example.myapplication.ADAPTER;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ public class SpinnerAddressAdapter extends BaseAdapter {
 
     private List<KhachHang> list;
 
-    public SpinnerAddressAdapter( List<KhachHang> list) {
+    public SpinnerAddressAdapter(List<KhachHang> list) {
 
         this.list = list;
     }

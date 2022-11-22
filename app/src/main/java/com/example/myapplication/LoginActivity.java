@@ -47,7 +47,6 @@ int REQUEST_CODE_SIGIN = 100;
             public void onClick(View view) {
                 String username = ed_user.getText().toString().trim();
                 String passWord = ed_pass.getText().toString().trim();
-
                 clickLogin(username, passWord);
             }
         });

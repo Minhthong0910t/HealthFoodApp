@@ -31,6 +31,7 @@ import java.util.List;
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.VIewholder>{
     private Context context;
     private List<GioHang> list;
+    int count=0;
     String TAG = "GIOHANGADAPTER";
     public GioHangAdapter(Context context, List<GioHang> list) {
         this.context = context;
@@ -54,8 +55,31 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.VIewhold
         //Log.d(TAG, "ghadapter: " + gh.getTenLoaiSanPham());
         Glide.with(context).load(gh.getHinhAnh()).into(holder.img_sp);
         holder.tvTenSp.setText(gh.getTenSanPham());
-        holder.tvGia.setText("gia: " + gh.getDonGia());
-        holder.tvSoLuong.setText("so luong: " + gh.getSoLuong());
+        holder.tvGia.setText("" + gh.getDonGia());
+        holder.tvSoLuong.setText("" + gh.getSoLuong());
+
+
+        holder.tang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count++;
+              holder.tvSoLuong.setText(""+count);
+            }
+        });
+
+        holder.giam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (count<=0)
+                    count=0;
+                else
+                count--;
+                holder.tvSoLuong.setText(""+count);
+            }
+        });
+
+
+
     }
 
     @Override
@@ -66,13 +90,16 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.VIewhold
     public class VIewholder extends RecyclerView.ViewHolder {
         ImageView img_sp;
         TextView tvTenLoai, tvTenSp, tvGia, tvSoLuong;
+        ImageView tang,giam;
         public VIewholder(@NonNull View itemView) {
             super(itemView);
             img_sp = itemView.findViewById(R.id.img_sp_gh);
-            tvTenLoai = itemView.findViewById(R.id.tv_ten_loai);
+//            tvTenLoai = itemView.findViewById(R.id.tv_ten_loai);
             tvTenSp= itemView.findViewById(R.id.tv_tensp);
             tvGia = itemView.findViewById(R.id.tv_gia);
             tvSoLuong = itemView.findViewById(R.id.tv_soluong);
+            tang=itemView.findViewById(R.id.tang);
+            giam=itemView.findViewById(R.id.giam);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -117,3 +144,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.VIewhold
         }
     }
 }
+
+//    public void increm(View view){ count  ; value.setText("" count); }
+//    public void decrem(View view){ if (count<=0) count=0; else count--; value.setText("" count); }
