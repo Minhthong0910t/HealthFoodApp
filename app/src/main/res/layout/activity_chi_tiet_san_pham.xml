@@ -7,17 +7,41 @@
     android:orientation="vertical"
     tools:context=".ChiTietSanPham"
     android:layout_margin="8dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/linertop"
+        android:weightSum="4"
+        android:orientation="vertical"
+      >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iconback"
+                android:id="@+id/img_back"
+                android:onClick="back"
 
+                />
+        </LinearLayout>
+
+    </LinearLayout>
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
+        android:layout_below="@+id/linertop"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="8dp"
             >
+
             <ImageView
                 android:id="@+id/img_sanpham"
                 android:layout_width="match_parent"

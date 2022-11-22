@@ -29,5 +29,9 @@
         android:name="com.example.myapplication.FRAGMENT.GioHangFragment"
         android:label="SanPhamFragment"
         tools:layout="@layout/fragment_gio_hang"/>
+    <activity
+        android:id="@+id/id_dangxuat"
+        android:name="com.example.myapplication.LoginActivity"
+        android:label="LoginActivity" />
 
 </navigation>

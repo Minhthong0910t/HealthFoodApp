@@ -3,7 +3,6 @@ package com.example.myapplication.FRAGMENT;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.ADAPTER.GioHangAdapter;
 import com.example.myapplication.ADAPTER.SpinnerAddressAdapter;
-import com.example.myapplication.LoginActivity;
 import com.example.myapplication.MODEL.DonHang;
 import com.example.myapplication.MODEL.GioHang;
 import com.example.myapplication.MODEL.KhachHang;
@@ -80,11 +78,6 @@ List<KhachHang> khachHangs;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         reference = FirebaseDatabase.getInstance().getReference("GioHangs");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user==null){
-
-            startActivity(new Intent(getContext(), LoginActivity.class));
-            return null;
-        }
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -95,6 +88,7 @@ List<KhachHang> khachHangs;
 
                     if(gh.getIdUser().equals(user.getUid())){
                         list.add(gh);
+
                         tongTien += gh.getDonGia()*gh.getSoLuong();
                         }
 

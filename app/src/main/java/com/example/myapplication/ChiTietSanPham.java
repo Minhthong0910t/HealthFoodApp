@@ -60,7 +60,7 @@ import java.util.List;
 public class ChiTietSanPham extends AppCompatActivity {
 String TAG  = "ChiTietSanPham";
     RelativeLayout btn_yeuthich;
-ImageView img_sanpham,img_tym_bay;
+ImageView img_sanpham,img_tym_bay,imback;
 TextView tv_ten_sp,tv_mota,tv_gia,tv_loaips,tv_luotban , tv_tongtien,tv_value,tv_time_ship,tv_total;
 RecyclerView recyrcleDanhGia;
 EditText ed_cmt;
@@ -80,6 +80,12 @@ CommentAdapter commentAdapter;
         setContentView(R.layout.activity_chi_tiwt_san_phammm);
 
       anhXaView();
+      imback.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              startActivity(new Intent(ChiTietSanPham.this,MainActivity.class));
+          }
+      });
         Intent intent = getIntent();
 
         FirebaseUser usercurent = FirebaseAuth.getInstance().getCurrentUser();
@@ -258,10 +264,11 @@ CommentAdapter commentAdapter;
         tv_total = findViewById(R.id.tv_total);
         tv_value = findViewById(R.id.tv_value);
         tv_tongtien = findViewById(R.id.tv_tongtien);
-
+        imback=findViewById(R.id.img_back);
 
 
     }
+
     private void Comments(String nd, int loaiUser, String maSP){
         FirebaseUser usercurent = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
