@@ -28,9 +28,8 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.FRAGMENT.AddLoaiSanPham;
-import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
-import com.example.myapplication.FRAGMENT.FragmentProfile;
-import com.example.myapplication.FRAGMENT.HomeFragment;
+
+import com.example.myapplication.MODEL.FRAGMENT.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

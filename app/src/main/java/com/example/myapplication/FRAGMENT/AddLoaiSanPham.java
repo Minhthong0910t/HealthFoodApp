@@ -40,8 +40,18 @@ import com.google.firebase.storage.UploadTask;
 
 public class AddLoaiSanPham extends Fragment {
 
-TextView ed_ten, ed_ma;
-Button btnadd, btn_xoa_trang;
+    TextView ed_ten, ed_ma;
+    Button btnadd, btn_xoa_trang;
+
+    ImageView btn_upload,img_sp;
+
+    //store
+    StorageReference storageReference;
+    private static final int IMAGE_REQUEST =1;
+    private Uri img_uri;
+    private StorageTask uploadtalk;
+    private String muri;
+
 
     ImageView btn_upload,img_sp;
 
@@ -116,8 +126,11 @@ Button btnadd, btn_xoa_trang;
         btn_upload = view.findViewById(R.id.btn_upload);
         img_sp = view.findViewById(R.id.img_sp);
 
-        ed_ten = view.findViewById(R.id.ed_ten_loai);
-        ed_ma = view.findViewById(R.id.ed_ma_loai);
+        btn_upload = view.findViewById(R.id.btn_upload);
+        img_sp = view.findViewById(R.id.img_sp);
+
+        ed_ten = view.findViewById(R.id.ed_tenloai);
+        ed_ma = view.findViewById(R.id.ed_maloai);
         btnadd = view.findViewById(R.id.btn_add_loai);
         btn_xoa_trang = view.findViewById(R.id.btn_xoa_trang);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
