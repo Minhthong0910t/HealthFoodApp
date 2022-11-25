@@ -77,13 +77,13 @@ CommentAdapter commentAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiwt_san_phammm);
+        setContentView(R.layout.activity_chi_tiet_san_phamm2);
 
       anhXaView();
       imback.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              startActivity(new Intent(ChiTietSanPham.this,MainActivity.class));
+             onBackPressed();
           }
       });
         Intent intent = getIntent();
@@ -107,7 +107,7 @@ CommentAdapter commentAdapter;
         tv_time_ship.setText(timeShip +" - "+ (timeShip + 5) +" Min");
         tv_gia.setText(String.valueOf(dgia));
         tv_luotban.setText("Lượt bán: " + luotBan);
-
+        tv_total.setText((count * Double.parseDouble(tv_gia.getText().toString()))+"");
         db.collection("Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
@@ -199,13 +199,18 @@ CommentAdapter commentAdapter;
         btn_add_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(usercurent==null){
+                    finish();
+                    startActivity(new Intent(ChiTietSanPham.this, LoginActivity.class));
+                    return;
+                }
                 GioHang gh = new GioHang();
                 if(Integer.parseInt(tv_value.getText().toString()) < 1){
                     Toast.makeText(ChiTietSanPham.this, "vui lòng chọn số lượng", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 gh.setIdUser(usercurent.getUid());
-
+                gh.setMaSP(maSP);
                 gh.setTenSanPham(name);
                 gh.setHinhAnh(urlIMG);
                 gh.setSoLuong(Integer.parseInt(tv_value.getText().toString()));
@@ -224,6 +229,8 @@ CommentAdapter commentAdapter;
 
             }
         });
+
+
     }
     public void addTymSanPham(String maspUpdate,String nameLoai,int favoriteUpdate){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -263,8 +270,9 @@ CommentAdapter commentAdapter;
 
         tv_total = findViewById(R.id.tv_total);
         tv_value = findViewById(R.id.tv_value);
-        tv_tongtien = findViewById(R.id.tv_tongtien);
+        tv_tongtien = findViewById(R.id.tv_total);
         imback=findViewById(R.id.img_back);
+
 
 
     }
@@ -322,6 +330,7 @@ CommentAdapter commentAdapter;
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             KhachHang kh = dataSnapshot.getValue(KhachHang.class);
+                            Log.d(TAG, "dcm: " + kh.getId()+kh.getName()+"??dcm");
                             if(kh.getId().equals(usercurent.getUid())){
                                 Comment cmt = new Comment();
                                 cmt.setId_comment(maSP);
@@ -372,5 +381,9 @@ CommentAdapter commentAdapter;
             tv_total.setText((count * Double.parseDouble(tv_gia.getText().toString()))+"");
         }
 
+    }
+
+    public void showCart(View view) {
+        startActivity(new Intent(ChiTietSanPham.this, ActivityGioHang.class));
     }
 }

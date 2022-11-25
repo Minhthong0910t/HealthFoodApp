@@ -10,42 +10,6 @@
     <include
         android:id="@+id/toolbar_gh"
         layout="@layout/toolbar"/>
-
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/lineetop"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginTop="0dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:padding="10dp"-->
-<!--        android:weightSum="10">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/img_onBack"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_weight="0.5"-->
-<!--            android:background="@drawable/backgfround_them_loaii"-->
-<!--            android:src="@drawable/iconback"-->
-<!--            />-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="8.5" />-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:src="@android:drawable/ic_delete" />-->
-
-
-<!--    </LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,25 +48,50 @@
         android:id="@+id/rcv_gioHang"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp" />
-
-        <TextView
-            android:id="@+id/titlecaliss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rcv_gioHang"
-            android:layout_centerInParent="true"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="bạn đã sẵn sang mua chưa?"
-            android:textSize="15dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
+<LinearLayout
+    android:id="@+id/btn_start_buy"
+    android:onClick="hideView"
+    android:layout_below="@id/rcv_gioHang"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/titlecaliss"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rcv_gioHang"
+
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="bạn đã sẵn sang mua chưa?"
+        android:textSize="15dp" />
+    <LinearLayout
+        android:id="@+id/btn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Mua"
+            android:textColor="#2196F3" />
+        <View
+            android:layout_width="match_parent"
+            android:background="#2196F3"
+            android:layout_height="1dp"/>
+    </LinearLayout>
+
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_buy"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_start_buy"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
         android:background="@drawable/back_catliss"
         android:orientation="vertical">
         <LinearLayout
@@ -131,6 +120,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:text="96.00"/>
+            <ImageView
+                android:id="@+id/img_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cart"/>
         </LinearLayout>
         <LinearLayout
             android:weightSum="100"

@@ -2,6 +2,7 @@ package com.example.myapplication.MODEL;
 
 public class GioHang {
     private String  idUser;
+    private String maSP;
     private String  tenSanPham, hinhAnh;
     private int soLuong;
     private double donGia;
@@ -9,13 +10,21 @@ public class GioHang {
     public GioHang() {
     }
 
-    public GioHang(String idUser, String tenSanPham, String hinhAnh, int soLuong, double donGia) {
+    public GioHang(String idUser, String maSP, String tenSanPham, String hinhAnh, int soLuong, double donGia) {
         this.idUser = idUser;
-
+        this.maSP = maSP;
         this.tenSanPham = tenSanPham;
         this.hinhAnh = hinhAnh;
         this.soLuong = soLuong;
         this.donGia = donGia;
+    }
+
+    public String getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
     }
 
     public int getSoLuong() {

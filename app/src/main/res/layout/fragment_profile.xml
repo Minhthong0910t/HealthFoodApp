@@ -23,9 +23,6 @@
         android:src="@drawable/gifadmin"
         android:id="@+id/avt_update"
         />
-
-
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

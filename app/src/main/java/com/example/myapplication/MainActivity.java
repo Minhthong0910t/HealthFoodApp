@@ -1,9 +1,5 @@
 package com.example.myapplication;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,30 +14,32 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 
-import com.bumptech.glide.Glide;
-import com.example.myapplication.FRAGMENT.AddLoaiSanPham;
-import com.example.myapplication.FRAGMENT.AddSanPhamFragment;
 import com.example.myapplication.FRAGMENT.FragmentProfile;
 import com.example.myapplication.FRAGMENT.GioHangFragment;
 import com.example.myapplication.FRAGMENT.HomeFragment;
+import com.example.myapplication.MODEL.FCMSend;
+import com.example.myapplication.MODEL.Token;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceIdReceiver;
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     public  ChipNavigationBar chipNavigationBar;
@@ -49,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    DrawerLayout mdrawerLayout;
-    NavigationView navigationView;
+   public DrawerLayout mdrawerLayout;
+   public NavigationView navigationView;
 
 
     @Override
@@ -81,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.cart:
                         fragment = new GioHangFragment();
                         break;
+                    case R.id.favorite:
+
 
 
                 }
@@ -108,8 +108,31 @@ public class MainActivity extends AppCompatActivity {
                 textTitle.setText(navDestination.getLabel());
             }
         });
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.d("TOKEN", "dmm: " + token);
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference tokens = database.getReference("Tokens");
+                        Token token_Model = new Token();
+                        token_Model.setToken(token);
+                        token_Model.setServerToken(false);
+                        Log.d("???", "dmm: " + token_Model.getToken());
+                        tokens.child("01237497949").setValue(token_Model);//test send cho sdt nay
+
+                    }
+                });
 
     }
+
+
 
 
     private void hover(){

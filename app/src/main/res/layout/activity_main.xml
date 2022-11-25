@@ -61,7 +61,6 @@
 
             </LinearLayout>
 
-            />
 
             <fragment
                 android:id="@+id/naHostFratment"

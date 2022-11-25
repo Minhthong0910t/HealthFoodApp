@@ -40,6 +40,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 public class FragmentProfile extends Fragment {
 
@@ -47,16 +49,18 @@ public class FragmentProfile extends Fragment {
 
 EditText ed_address, ed_phone;
 Button btn_update;
-
+GifImageView avt_update;
 String TAG  ="KHDSD";
 List<KhachHang> list;
     private Uri muri;
+
+    FirebaseFirestore db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view =inflater.inflate(R.layout.fragment_profile, container, false);
         anhXa();
-
+        db= FirebaseFirestore.getInstance();
         FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference referencekhs = FirebaseDatabase.getInstance().getReference("KhachHangs");
         btn_update.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +83,12 @@ List<KhachHang> list;
                 Toast.makeText(getContext(), "cap nhat thong tin thanh cong", Toast.LENGTH_SHORT).show();
             }
         });
-
+        avt_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
 
         return view;
     }
@@ -87,6 +96,7 @@ List<KhachHang> list;
         ed_address = view.findViewById(R.id.ed_adress);
         ed_phone = view.findViewById(R.id.ed_phone);
         btn_update = view.findViewById(R.id.btn_update);
+        avt_update = view.findViewById(R.id.avt_update);
     }
 
 }

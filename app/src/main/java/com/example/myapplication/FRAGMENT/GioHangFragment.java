@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.example.myapplication.MODEL.DonHang;
 import com.example.myapplication.MODEL.GioHang;
 import com.example.myapplication.MODEL.KhachHang;
 import com.example.myapplication.MODEL.NhanVien;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -55,8 +57,8 @@ public class GioHangFragment extends Fragment {
 
 String TAG  = "GIOHANG";
 private View view;
-TextView tv_tongTien, tv_phone,tv_diachi;
-
+TextView tv_tongTien, tv_phone;
+ImageView img_onBack;
 Button btn_mua;
 RecyclerView recyclerView;
 GioHangAdapter gioHangAdapter;
@@ -73,8 +75,10 @@ List<KhachHang> khachHangs;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_gio_hang, container, false);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.chipNavigationBar.setVisibility(View.INVISIBLE);
+        mainActivity.navigationView.setVisibility(View.INVISIBLE);
         anhXa();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         reference = FirebaseDatabase.getInstance().getReference("GioHangs");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -200,7 +204,7 @@ List<KhachHang> khachHangs;
         tv_tongTien = view.findViewById(R.id.tv_tong_tien);
         btn_mua = view.findViewById(R.id.btn_dat_hang);
        spin_Adress = view.findViewById(R.id.spinner_diachi);
-      //  tv_diachi = view.findViewById(R.id.tv_diachi);
+    //    img_onBack = view.findViewById(R.id.img_onBack);
         tv_phone = view.findViewById(R.id.tv_sdt);
     progressDialog = new ProgressDialog(getContext());
         khachHangs = new ArrayList<>();

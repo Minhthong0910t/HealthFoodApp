@@ -8,7 +8,6 @@
     android:backgroundTint="@color/black"
     android:layout_height="wrap_content">
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/backgroud_itemgiohang"
@@ -25,15 +24,16 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/img_sp_gh"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="60dp"
                 android:src="@drawable/img3"/>
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="2.7"
+            android:layout_weight="2.6"
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -92,34 +92,5 @@
             </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="5dp"
-            android:background="@drawable/nensp"
-            android:layout_weight="0.2">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:id="@+id/tang"
-                android:src="@drawable/tang"
-                android:textColor="@color/black"
-                android:background="@drawable/backgrou_trong"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:id="@+id/giam"
-                android:src="@drawable/giam"
-                android:layout_marginTop="3dp"
-                android:textColor="@color/black"
-                android:background="@drawable/backgrou_trong"
-
-                />
-
-        </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>
