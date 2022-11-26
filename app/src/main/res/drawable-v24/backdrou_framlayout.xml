@@ -9,6 +9,5 @@ android:color="@color/white"
 
         android:startColor="#FFD89E"
         android:endColor="#FFFFFF"
-        android:angle="@integer/material_motion_duration_short_2"
         />
 </shape>

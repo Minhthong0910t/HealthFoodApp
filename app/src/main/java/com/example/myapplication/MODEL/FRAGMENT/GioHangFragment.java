@@ -1,10 +1,12 @@
 package com.example.myapplication.FRAGMENT;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,10 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,25 +26,26 @@ import android.widget.Toast;
 import com.example.myapplication.ADAPTER.GioHangAdapter;
 import com.example.myapplication.ADAPTER.SpinnerAddressAdapter;
 import com.example.myapplication.MODEL.DonHang;
-import com.example.myapplication.MODEL.FCMSend;
 import com.example.myapplication.MODEL.GioHang;
 import com.example.myapplication.MODEL.KhachHang;
-
-import com.example.myapplication.MODEL.Token;
-import com.example.myapplication.MainActivity;
+import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +55,8 @@ public class GioHangFragment extends Fragment {
 
 String TAG  = "GIOHANG";
 private View view;
-TextView tv_tongTien, tv_phone;
-ImageView img_onBack;
+TextView tv_tongTien, tv_phone,tv_diachi;
+
 Button btn_mua;
 RecyclerView recyclerView;
 GioHangAdapter gioHangAdapter;
@@ -70,10 +73,8 @@ List<KhachHang> khachHangs;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_gio_hang, container, false);
-        MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.chipNavigationBar.setVisibility(View.INVISIBLE);
-        mainActivity.navigationView.setVisibility(View.INVISIBLE);
         anhXa();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         reference = FirebaseDatabase.getInstance().getReference("GioHangs");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -118,6 +119,35 @@ List<KhachHang> khachHangs;
                 }
             }
         });
+        referencekhs.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Log.d(TAG, "alo alo ");
+
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         btn_mua.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,20 +179,6 @@ List<KhachHang> khachHangs;
               dh.setSdt(tv_phone.getText().toString());
               dh.setSanphams(list);
 
-                DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens").child("0777476404");
-                tokens.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Token token = snapshot.getValue(Token.class);
-                        FCMSend.pushNotification(getContext(), token.getToken(), "Thông báo đơn hàng mới", "Bạn vừa nhận 1 đơn hàng mới:"
-                        +"\n" + kh.getName() +"\n"+ kh.getSdt() +"\n" + kh.getDiachi());
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
               referencedh.push().setValue(dh).addOnCompleteListener(new OnCompleteListener<Void>() {
                   @Override
                   public void onComplete(@NonNull Task<Void> task) {
@@ -184,7 +200,7 @@ List<KhachHang> khachHangs;
         tv_tongTien = view.findViewById(R.id.tv_tong_tien);
         btn_mua = view.findViewById(R.id.btn_dat_hang);
        spin_Adress = view.findViewById(R.id.spinner_diachi);
-    //    img_onBack = view.findViewById(R.id.img_onBack);
+      //  tv_diachi = view.findViewById(R.id.tv_diachi);
         tv_phone = view.findViewById(R.id.tv_sdt);
     progressDialog = new ProgressDialog(getContext());
         khachHangs = new ArrayList<>();

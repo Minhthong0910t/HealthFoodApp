@@ -52,16 +52,6 @@ public class AddLoaiSanPham extends Fragment {
     private StorageTask uploadtalk;
     private String muri;
 
-
-    ImageView btn_upload,img_sp;
-
-    //store
-    StorageReference storageReference;
-    private static final int IMAGE_REQUEST =1;
-    private Uri img_uri;
-    private StorageTask uploadtalk;
-    private String muri;
-
     View view;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
@@ -129,8 +119,8 @@ public class AddLoaiSanPham extends Fragment {
         btn_upload = view.findViewById(R.id.btn_upload);
         img_sp = view.findViewById(R.id.img_sp);
 
-        ed_ten = view.findViewById(R.id.ed_tenloai);
-        ed_ma = view.findViewById(R.id.ed_maloai);
+        ed_ten = view.findViewById(R.id.ed_ten_loai);
+        ed_ma = view.findViewById(R.id.ed_ma_loai);
         btnadd = view.findViewById(R.id.btn_add_loai);
         btn_xoa_trang = view.findViewById(R.id.btn_xoa_trang);
         storageReference = FirebaseStorage.getInstance().getReference("uploads");

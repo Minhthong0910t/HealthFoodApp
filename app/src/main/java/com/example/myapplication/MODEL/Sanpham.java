@@ -5,6 +5,7 @@ import java.util.Map;
 public class Sanpham {
     private String masp;
     private String name;
+    private  String maloai;
     private double price;
     private int time_ship;
     private String describe;//mo ta
@@ -17,7 +18,7 @@ public class Sanpham {
     private String id_kh;
     private int starDanhGia;
 
-    public Sanpham() {
+    public Sanpham(String maLoai, String masp, String name, double price, int time_ship, String describe, int favorite, int i, String muri, String lspName, Object id_kh, int starDanhGia) {
     }
 
     public Sanpham(String masp, String name, double price, int time_ship, String describe, int luot_mua, int favorite, String imgURL, Map<String, Comment> comments, String ten_loai, String id_kh, int starDanhGia) {
@@ -130,4 +131,7 @@ public class Sanpham {
     public void setStarDanhGia(int starDanhGia) {
         this.starDanhGia = starDanhGia;
     }
+
+
+
 }

@@ -30,7 +30,7 @@
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#fff"
         />
-    <item android:id="@+id/cart"
+    <item android:id="@+id/id_giohang"
         android:title="cart"
         android:icon="@drawable/ic_shopping_cart"
         app:cnb_backgroundColor="#FFCE21"

@@ -60,12 +60,13 @@ import java.util.List;
 public class ChiTietSanPham extends AppCompatActivity {
 String TAG  = "ChiTietSanPham";
     RelativeLayout btn_yeuthich;
-ImageView img_sanpham,img_tym_bay,imback;
-TextView tv_ten_sp,tv_mota,tv_gia,tv_loaips,tv_luotban , tv_tongtien,tv_value,tv_time_ship,tv_total;
+ImageView img_sanpham,img_tym_bay;
+TextView tv_ten_sp,tv_mota,tv_gia,tv_loaips,tv_luotban , tv_tongtien;
 RecyclerView recyrcleDanhGia;
 EditText ed_cmt;
 Button btn_cmt;
 Button btn_add_cart;
+EditText ed_soluong;
 
 
 List<Comment> comments;
@@ -77,15 +78,9 @@ CommentAdapter commentAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet_san_phamm2);
+        setContentView(R.layout.activity_chi_tiet_san_pham);
 
       anhXaView();
-      imback.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-             onBackPressed();
-          }
-      });
         Intent intent = getIntent();
 
         FirebaseUser usercurent = FirebaseAuth.getInstance().getCurrentUser();
@@ -96,7 +91,6 @@ CommentAdapter commentAdapter;
        double dgia =  intent.getDoubleExtra("donGia", 0);
        String urlIMG =  intent.getStringExtra("hinhAnh");
        String moTa =  intent.getStringExtra("moTa");
-       int luotBan = intent.getIntExtra("LuotBan",0);
        int favorite = intent.getIntExtra("favorite",0);
        int timeShip =  intent.getIntExtra("time", 0);
        String tenLoai =  intent.getStringExtra("tenLoai");
@@ -104,10 +98,10 @@ CommentAdapter commentAdapter;
         Glide.with(this).load(urlIMG).into(img_sanpham);
         tv_ten_sp.setText(name);
         tv_mota.setText(moTa);
-        tv_time_ship.setText(timeShip +" - "+ (timeShip + 5) +" Min");
-        tv_gia.setText(String.valueOf(dgia));
-        tv_luotban.setText("Lượt bán: " + luotBan);
-        tv_total.setText((count * Double.parseDouble(tv_gia.getText().toString()))+"");
+        tv_gia.setText("Gia: " + dgia);
+        tv_loaips.setText(tenLoai);
+        tv_luotban.setText("0");
+
         db.collection("Comments").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
@@ -194,27 +188,22 @@ CommentAdapter commentAdapter;
         btn_add_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(usercurent==null){
-                    finish();
-                    startActivity(new Intent(ChiTietSanPham.this, LoginActivity.class));
-                    return;
-                }
                 GioHang gh = new GioHang();
-                if(Integer.parseInt(tv_value.getText().toString()) < 1){
+                if(ed_soluong.getText().toString().equals("")){
                     Toast.makeText(ChiTietSanPham.this, "vui lòng chọn số lượng", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 gh.setIdUser(usercurent.getUid());
-                gh.setMaSP(maSP);
+
                 gh.setTenSanPham(name);
                 gh.setHinhAnh(urlIMG);
-                gh.setSoLuong(Integer.parseInt(tv_value.getText().toString()));
+                gh.setSoLuong(Integer.parseInt(ed_soluong.getText().toString()));
                 gh.setDonGia(dgia);
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
                 reference.child("GioHangs")
-                        .child(maSP).setValue(gh, new DatabaseReference.CompletionListener() {
+                        .push().setValue(gh, new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                 Toast.makeText(ChiTietSanPham.this, "da them vao gio hang", Toast.LENGTH_SHORT).show();
@@ -224,8 +213,6 @@ CommentAdapter commentAdapter;
 
             }
         });
-
-
     }
     public void addTymSanPham(String maspUpdate,String nameLoai,int favoriteUpdate){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -250,7 +237,6 @@ CommentAdapter commentAdapter;
          tv_mota = findViewById(R.id.tv_mota);
          tv_gia = findViewById(R.id.tv_gia);
          tv_loaips = findViewById(R.id.tv_loaips);
-        tv_time_ship = findViewById(R.id.tv_time_ship);
         tv_luotban  = findViewById(R.id.tv_luotban);
          recyrcleDanhGia = findViewById(R.id.recyrcleDanhGia);
          recyrcleDanhGia.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
@@ -262,16 +248,12 @@ CommentAdapter commentAdapter;
         img_tym_bay= findViewById(R.id.img_tymbay);
 
         btn_add_cart = findViewById(R.id.btn_add_Cart);
-
-        tv_total = findViewById(R.id.tv_total);
-        tv_value = findViewById(R.id.tv_value);
-        tv_tongtien = findViewById(R.id.tv_total);
-        imback=findViewById(R.id.img_back);
+        ed_soluong = findViewById(R.id.ed_soluong);
+        tv_tongtien = findViewById(R.id.tv_tongtien);
 
 
 
     }
-
     private void Comments(String nd, int loaiUser, String maSP){
         FirebaseUser usercurent = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -325,7 +307,6 @@ CommentAdapter commentAdapter;
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             KhachHang kh = dataSnapshot.getValue(KhachHang.class);
-                            Log.d(TAG, "dcm: " + kh.getId()+kh.getName()+"??dcm");
                             if(kh.getId().equals(usercurent.getUid())){
                                 Comment cmt = new Comment();
                                 cmt.setId_comment(maSP);
@@ -359,26 +340,5 @@ CommentAdapter commentAdapter;
             }
 
         }
-    }
-    int count = 1;
-    public void onclickTang(View view) {
-        count++;
-        tv_value.setText(String.valueOf(count));
-        tv_total.setText((count * Double.parseDouble(tv_gia.getText().toString()))+"");
-    }
-
-    public void onClickGiam(View view) {
-        if(count<=1){
-            count=1;
-        }else{
-            count--;
-            tv_value.setText(String.valueOf(count));
-            tv_total.setText((count * Double.parseDouble(tv_gia.getText().toString()))+"");
-        }
-
-    }
-
-    public void showCart(View view) {
-        startActivity(new Intent(ChiTietSanPham.this, ActivityGioHang.class));
     }
 }
