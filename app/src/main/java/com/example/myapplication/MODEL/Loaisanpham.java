@@ -1,6 +1,5 @@
 package com.example.myapplication.MODEL;
 
-import java.util.List;
 import java.util.Map;
 
 public class Loaisanpham {
@@ -9,7 +8,7 @@ public class Loaisanpham {
     private String imgURL;
     private Map<String, Sanpham> sanphams;
 
-    public Loaisanpham() {
+    public Loaisanpham(String maLoai, String name, Map<String, Sanpham> map) {
     }
 
     public Loaisanpham(String maLoai, String name, String imgURL, Map<String, Sanpham> sanphams) {

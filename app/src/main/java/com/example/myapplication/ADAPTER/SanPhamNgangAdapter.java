@@ -1,17 +1,10 @@
 package com.example.myapplication.ADAPTER;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,25 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.ChiTietSanPham;
-import com.example.myapplication.FRAGMENT.HomeFragment;
-import com.example.myapplication.LoginActivity;
+import com.example.myapplication.MODEL.FRAGMENT.HomeFragment;
 import com.example.myapplication.MODEL.Loaisanpham;
-import com.example.myapplication.MODEL.NhanVien;
 import com.example.myapplication.MODEL.Sanpham;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.InputStream;
 import java.util.List;
 
 

@@ -1,7 +1,10 @@
 {
   "project_info": {
     "project_number": "430933615767",
+<<<<<<< HEAD
+=======
     "firebase_url": "https://healthfoodapp-a1c25-default-rtdb.firebaseio.com",
+>>>>>>> origin/master
     "project_id": "healthfoodapp-a1c25",
     "storage_bucket": "healthfoodapp-a1c25.appspot.com"
   },

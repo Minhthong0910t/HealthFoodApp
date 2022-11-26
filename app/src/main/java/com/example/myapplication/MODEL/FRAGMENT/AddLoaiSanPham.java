@@ -1,4 +1,4 @@
-package com.example.myapplication.FRAGMENT;
+package com.example.myapplication.MODEL.FRAGMENT;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,19 +40,9 @@ import com.google.firebase.storage.UploadTask;
 
 
 public class AddLoaiSanPham extends Fragment {
+    TextInputEditText  ed_ten, ed_ma;
 
-    TextView ed_ten, ed_ma;
     Button btnadd, btn_xoa_trang;
-
-    ImageView btn_upload,img_sp;
-
-    //store
-    StorageReference storageReference;
-    private static final int IMAGE_REQUEST =1;
-    private Uri img_uri;
-    private StorageTask uploadtalk;
-    private String muri;
-
 
     ImageView btn_upload,img_sp;
 
@@ -123,9 +114,6 @@ public class AddLoaiSanPham extends Fragment {
         return view;
     }
     private void anhXaView(){
-        btn_upload = view.findViewById(R.id.btn_upload);
-        img_sp = view.findViewById(R.id.img_sp);
-
         btn_upload = view.findViewById(R.id.btn_upload);
         img_sp = view.findViewById(R.id.img_sp);
 
