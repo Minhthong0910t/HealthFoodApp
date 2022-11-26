@@ -154,7 +154,8 @@ List<KhachHang> khachHangs;
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Token token = snapshot.getValue(Token.class);
-                        FCMSend.pushNotification(getContext(), token.getToken(), "Thông báo đơn hàng mới", "Bạn vừa nhận 1 đơn hàng mới");
+                        FCMSend.pushNotification(getContext(), token.getToken(), "Thông báo đơn hàng mới", "Bạn vừa nhận 1 đơn hàng mới:"
+                        +"\n" + kh.getName() +"\n"+ kh.getSdt() +"\n" + kh.getDiachi());
                     }
 
                     @Override

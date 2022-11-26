@@ -21,9 +21,11 @@ import android.widget.Toast;
 import com.example.myapplication.ADAPTER.GioHangAdapter;
 import com.example.myapplication.ADAPTER.SpinnerAddressAdapter;
 import com.example.myapplication.MODEL.DonHang;
+import com.example.myapplication.MODEL.FCMSend;
 import com.example.myapplication.MODEL.GioHang;
 import com.example.myapplication.MODEL.KhachHang;
 
+import com.example.myapplication.MODEL.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -145,7 +147,20 @@ public class ActivityGioHang extends AppCompatActivity {
                 dh.setDiaChi(kh.getDiachi());
                 dh.setSdt(tv_phone.getText().toString());
                 dh.setSanphams(list);
+                DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens").child("0777476404");
+                tokens.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Token token = snapshot.getValue(Token.class);
+                        FCMSend.pushNotification(ActivityGioHang.this, token.getToken(), "Thông báo đơn hàng mới", "Bạn vừa nhận 1 đơn hàng mới:"
+                                +"\n" + kh.getName() +"\n"+ kh.getSdt() +"\n" + kh.getDiachi());
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 referencedh.child(String.valueOf(System.currentTimeMillis())).setValue(dh).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
