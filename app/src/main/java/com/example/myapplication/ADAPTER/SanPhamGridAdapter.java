@@ -133,6 +133,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
                 intent.putExtra("MaLoai", sp.getMaLoai());
 
 
+
                 context.startActivity(intent);
 
             }
@@ -153,7 +154,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
                 intent.putExtra("favorite", sp.getFavorite());
                 intent.putExtra("time", sp.getTime_ship());
                 intent.putExtra("tenLoai", sp.getMaLoai());
-
+                intent.putExtra("LuotBan", sp.getLuot_mua());
 
                 context.startActivity(intent);
             }

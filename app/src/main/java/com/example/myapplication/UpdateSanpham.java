@@ -120,8 +120,6 @@ public class UpdateSanpham extends AppCompatActivity {
                 double priceSP_up = Double.parseDouble(ed_giaUp.getEditText().getText().toString());
                 String describeSP_up = ed_motaUp.getEditText().getText().toString();
                 int time_shipSP_up = Integer.parseInt(ed_timeshipUp.getEditText().getText().toString());
-//                Toast.makeText(UpdateSanpham.this, "Update thành công", Toast.LENGTH_SHORT).show();
-//                onBackPressed();
 
                 db.collection("LoaiSanPhams").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

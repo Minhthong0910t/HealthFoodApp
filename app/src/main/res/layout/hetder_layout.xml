@@ -28,6 +28,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:id="@+id/img_avatanavigation"
             android:src="@mipmap/ic_launcher" />
 
         <TextView

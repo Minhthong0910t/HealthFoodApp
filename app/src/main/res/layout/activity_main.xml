@@ -25,34 +25,42 @@
                 android:orientation="horizontal"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
+                android:weightSum="6"
                 app:layout_constraintBaseline_toTopOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/immenu"
+                        android:src="@drawable/iconmenu" />
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/immenu"
-                    android:src="@drawable/iconmenu" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
+                  android:gravity="center"
                     android:text="HELTHY FOOOD"
                     android:id="@+id/textTitle"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:layout_width="40dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
                     android:src="@drawable/icon_profile" />
 
             </LinearLayout>
 
-            />
 
             <fragment
                 android:id="@+id/naHostFratment"

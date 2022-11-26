@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class KhachHang extends User{
-    private String sdt, diachi;
+    public String sdt, diachi;
 
     public KhachHang(String id, String name, String email, String password, String imgURL, boolean trangThaiTym, int loaiUser, int soSaoDanhGia, String sdt, String diachi) {
         super(id, name, email, password, imgURL, trangThaiTym, loaiUser, soSaoDanhGia);
