@@ -5,6 +5,6 @@
         android:startColor="#868686"
         android:centerColor="#252525"
         android:endColor="#838383"
-        android:angle="@integer/material_motion_duration_short_2"
+        android:angle="45"
         />
 </shape>

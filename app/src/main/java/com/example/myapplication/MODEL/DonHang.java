@@ -3,6 +3,7 @@ package com.example.myapplication.MODEL;
 import java.util.List;
 
 public class DonHang {
+    private String maDonHang;
     private String sdt;
     private String name;
     private String diaChi;
@@ -13,13 +14,22 @@ public class DonHang {
     public DonHang() {
     }
 
-    public DonHang(String sdt, String name, String diaChi, double tongTien, String trangThai, List<GioHang> sanphams) {
+    public DonHang(String maDonHang, String sdt, String name, String diaChi, double tongTien, String trangThai, List<GioHang> sanphams) {
+        this.maDonHang = maDonHang;
         this.sdt = sdt;
         this.name = name;
         this.diaChi = diaChi;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
         this.sanphams = sanphams;
+    }
+
+    public String getMaDonHang() {
+        return maDonHang;
+    }
+
+    public void setMaDonHang(String maDonHang) {
+        this.maDonHang = maDonHang;
     }
 
     public String getTrangThai() {

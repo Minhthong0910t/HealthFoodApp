@@ -122,7 +122,7 @@ public class ActivityGioHang extends AppCompatActivity {
                     DatabaseReference  referencedh =  FirebaseDatabase.getInstance().getReference("DonHangs");
 
                 DonHang dh = new DonHang();
-
+                dh.setMaDonHang(String.valueOf(System.currentTimeMillis()));
                 dh.setTongTien(Double.parseDouble(tv_tongTien.getText().toString()));
                 KhachHang kh = (KhachHang) spin_Adress.getSelectedItem();
                 if(kh==null){
@@ -140,13 +140,13 @@ public class ActivityGioHang extends AppCompatActivity {
                     Toast.makeText(ActivityGioHang.this, "Vui long them sdt", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                dh.setTrangThai("cho shiper");
+                dh.setTrangThai("đang ở kho");
                 dh.setName(kh.getName());
                 dh.setDiaChi(kh.getDiachi());
                 dh.setSdt(tv_phone.getText().toString());
                 dh.setSanphams(list);
 
-                referencedh.push().setValue(dh).addOnCompleteListener(new OnCompleteListener<Void>() {
+                referencedh.child(String.valueOf(System.currentTimeMillis())).setValue(dh).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         progressDialog.dismiss();

@@ -3,6 +3,7 @@ package com.example.myapplication.FRAGMENT;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.myapplication.LoginActivity;
 import com.example.myapplication.MODEL.KhachHang;
+import com.example.myapplication.MODEL.Token;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +70,10 @@ List<KhachHang> list;
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(userCurrent==null){
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                    return;
+                }
                 if(ed_address.getText().toString().equals("")){
                     Toast.makeText(getContext(), "khong duoc de trong dia chi", Toast.LENGTH_SHORT).show();
                     return;
@@ -80,6 +88,25 @@ List<KhachHang> list;
                 map.put("sdt", ed_phone.getText().toString());
 
                 referencekhs.child(userCurrent.getUid()).updateChildren(map);
+
+                FirebaseMessaging.getInstance().getToken()
+                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                            @Override
+                            public void onComplete(@NonNull Task<String> task) {
+                                if (!task.isSuccessful()) {
+                                    return;
+                                }
+                                // Get new FCM registration token
+                                String token = task.getResult();
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference tokens = database.getReference("Tokens");
+                                Token token_Model = new Token();
+                                token_Model.setToken(token);
+                                token_Model.setServerToken(false);
+                                tokens.child(ed_phone.getText().toString()).setValue(token_Model);
+
+                            }
+                        });
                 Toast.makeText(getContext(), "cap nhat thong tin thanh cong", Toast.LENGTH_SHORT).show();
             }
         });

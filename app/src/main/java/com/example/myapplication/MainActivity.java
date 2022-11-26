@@ -108,27 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 textTitle.setText(navDestination.getLabel());
             }
         });
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            return;
-                        }
 
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        Log.d("TOKEN", "dmm: " + token);
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference tokens = database.getReference("Tokens");
-                        Token token_Model = new Token();
-                        token_Model.setToken(token);
-                        token_Model.setServerToken(false);
-                        Log.d("???", "dmm: " + token_Model.getToken());
-                        tokens.child("01237497949").setValue(token_Model);//test send cho sdt nay
-
-                    }
-                });
 
     }
 
