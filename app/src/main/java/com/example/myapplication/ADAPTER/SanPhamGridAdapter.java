@@ -114,7 +114,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteSanpham(sp.getMasp(), sp.getMaLoai());
+                deleteSanpham(sp.getMasp(), sp.getMasp());
 
             }
         });
@@ -130,7 +130,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
                 intent.putExtra("hinhAnhUP", sp.getImgURL());
                 intent.putExtra("moTaUP", sp.getDescribe());
                 intent.putExtra("timeUP", sp.getTime_ship());
-                intent.putExtra("MaLoai", sp.getMaLoai());
+                intent.putExtra("MaLoai", sp.getMasp());
 
 
 
@@ -153,7 +153,7 @@ public class SanPhamGridAdapter extends BaseAdapter {
                 intent.putExtra("star", sp.getStarDanhGia());
                 intent.putExtra("favorite", sp.getFavorite());
                 intent.putExtra("time", sp.getTime_ship());
-                intent.putExtra("tenLoai", sp.getMaLoai());
+                intent.putExtra("tenLoai", sp.getMasp());
                 intent.putExtra("LuotBan", sp.getLuot_mua());
 
                 context.startActivity(intent);

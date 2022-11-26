@@ -4,61 +4,64 @@
     android:background="@drawable/img"
     android:orientation="vertical"
     android:layout_height="match_parent">
-    <TextView
-        android:background="#FFC107"
+    <ImageView
+        android:id="@+id/img_sp"
         android:layout_width="match_parent"
-        android:text="THÊM LOẠI SẢN PHẨM"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:textColor="@color/black"
-        android:layout_height="@dimen/height_tv"/>
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/img1" />
+
+    <ImageView
+        android:id="@+id/btn_upload"
+        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/up_file"/>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
-        <ImageView
-            android:id="@+id/img_sp"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="@dimen/magin_update"
-            android:src="@drawable/img1" />
-        <ImageView
-            android:id="@+id/btn_upload"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="@dimen/magin_update"
-            android:src="@drawable/up_file" />
+        android:layout_width="wrap_content"
+        android:layout_height="346dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/backgfround_them_loaii"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ed_ten_loai"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập tên loại sản phẩm"
-            android:layout_marginTop="@dimen/magin_update"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Thêm Loại"
+            android:textColor="#8b4513"
+            android:textSize="40dp"
+            android:textStyle="bold|italic" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/ed_ma_loai"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập tên loại sản phẩm"
-            android:layout_marginTop="@dimen/magin_update"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_width="304dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/ic_baseline_code_24"
+            android:hint="Mã Loại"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/ed_ten_loai"
+            android:layout_width="304dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/custom_name_focus"
+            android:hint="Tên Loại"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -85,9 +88,5 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-
 </LinearLayout>

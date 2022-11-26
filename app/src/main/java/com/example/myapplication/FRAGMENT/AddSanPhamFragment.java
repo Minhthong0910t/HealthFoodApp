@@ -32,7 +32,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -56,7 +55,7 @@ public class AddSanPhamFragment extends Fragment {
     //view
     ImageView btn_upload,img_sp;
 
-    TextInputLayout ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta;
+    EditText ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta;
     ProgressDialog progressDialog;
     Button btn_add;
     Spinner spinnerLoaisp;
@@ -99,16 +98,16 @@ public class AddSanPhamFragment extends Fragment {
             public void onClick(View view) {
                 progressDialog.show();
 
-                String masp = ed_masp.getEditText().getText().toString();
-                String name = ed_ten.getEditText().getText().toString();
-                double price = Double.parseDouble(ed_gia.getEditText().getText().toString());
-                String describe = ed_mo_ta.getEditText().getText().toString();
-                int time_ship = Integer.parseInt(ed_time.getEditText().getText().toString());
+                String masp = ed_masp.getText().toString();
+                String name = ed_ten.getText().toString();
+                double price = Double.parseDouble(ed_gia.getText().toString());
+                String describe = ed_mo_ta.getText().toString();
+                int time_ship = Integer.parseInt(ed_time.getText().toString());
 
                 Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
                 Map<String, Sanpham> map  = new HashMap<>();
                 
-                map.put(masp, new Sanpham(lsp.getMaLoai(),masp, name, price, time_ship, describe, 0, 0, muri,lsp.getName(),null,3));
+                map.put(masp, new Sanpham(masp, name, price, time_ship, describe, 0, 0, muri, null,lsp.getName(),null,3));
                 Loaisanpham lspnew = new Loaisanpham(lsp.getMaLoai(),lsp.getName(),lsp.getImgURL(), map);
 
                 db.collection("LoaiSanPhams").document(lsp.getMaLoai()).set(lspnew, SetOptions.merge())
@@ -117,20 +116,14 @@ public class AddSanPhamFragment extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()) {
-                            img_sp.setImageResource(R.drawable.img1);
-                            ed_ten.getEditText().setText("");
-                            ed_masp.getEditText().setText("");
-                            ed_gia.getEditText().setText("");
-                            ed_time.getEditText().setText("");
-                            ed_mo_ta.getEditText().setText("");
-                            Toast.makeText(getContext(), "them san pham thanh cong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "ghi du lieu thanh cong", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "them that bai", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "ghi that bai", Toast.LENGTH_SHORT).show();
                             }
                         })     ;
 

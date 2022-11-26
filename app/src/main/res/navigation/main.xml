@@ -6,7 +6,7 @@
     app:startDestination="@id/id_HOME">
     <fragment
         android:id="@+id/id_HOME"
-        android:name="com.example.myapplication.FRAGMENT.HomeFragment"
+        android:name="com.example.myapplication.MODEL.FRAGMENT.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
     <fragment
@@ -20,17 +20,12 @@
         android:label="SanPhamFragment"
         tools:layout="@layout/them_san_pham"/>
     <fragment
-        android:id="@+id/id_editprofile"
-        android:name="com.example.myapplication.FRAGMENT.FragmentProfile"
-        android:label="SanPhamFragment"
-        tools:layout="@layout/fragment_profile"/>
-    <fragment
-        android:id="@+id/id_add_donhang"
-        android:name="com.example.myapplication.FRAGMENT.GioHangFragment"
-        android:label="SanPhamFragment"
-        tools:layout="@layout/fragment_gio_hang"/>
+        android:id="@+id/id_addyeuthich"
+        android:name="com.example.myapplication.MODEL.FRAGMENT.SanPhamYeuThichFragment"
+        android:label="fragment_nhanvien"
+        tools:layout="@layout/fragment_san_pham_yeu_thich" />
     <activity
-        android:id="@+id/id_dangxuat"
+        android:id="@+id/loginActivity"
         android:name="com.example.myapplication.LoginActivity"
         android:label="LoginActivity" />
 

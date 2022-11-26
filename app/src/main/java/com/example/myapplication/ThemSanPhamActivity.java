@@ -43,7 +43,7 @@ import java.util.Map;
 public class ThemSanPhamActivity extends AppCompatActivity {
     ImageView btn_upload,img_sp;
 
-    TextInputLayout ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta;
+    EditText ed_ten,ed_gia, ed_masp, ed_time, ed_mo_ta;
     ProgressDialog progressDialog;
     Button btn_add;
     Spinner spinnerLoaisp;
@@ -84,11 +84,11 @@ public class ThemSanPhamActivity extends AppCompatActivity {
             public void onClick(View view) {
                 progressDialog.show();
 
-                String masp = ed_masp.getEditText().getText().toString();
-                String name = ed_ten.getEditText().getText().toString();
-                double price = Double.parseDouble(ed_gia.getEditText().getText().toString());
-                String describe = ed_mo_ta.getEditText().getText().toString();
-                int time_ship = Integer.parseInt(ed_time.getEditText().getText().toString());
+                String masp = ed_masp.getText().toString();
+                String name = ed_ten.getText().toString();
+                double price = Double.parseDouble(ed_gia.getText().toString());
+                String describe = ed_mo_ta.getText().toString();
+                int time_ship = Integer.parseInt(ed_time.getText().toString());
 
                 Loaisanpham lsp = (Loaisanpham) spinnerLoaisp.getSelectedItem();
                 Map<String, Sanpham> map  = new HashMap<>();
@@ -103,11 +103,11 @@ public class ThemSanPhamActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 if(task.isSuccessful()) {
                                     img_sp.setImageResource(R.drawable.img1);
-                                    ed_ten.getEditText().setText("");
-                                    ed_masp.getEditText().setText("");
-                                    ed_gia.getEditText().setText("");
-                                    ed_time.getEditText().setText("");
-                                    ed_mo_ta.getEditText().setText("");
+                                    ed_ten.setText("");
+                                    ed_masp.setText("");
+                                    ed_gia.setText("");
+                                    ed_time.setText("");
+                                    ed_mo_ta.setText("");
                                     Toast.makeText(ThemSanPhamActivity.this, "them san pham thanh cong", Toast.LENGTH_SHORT).show();
 
                                 }
@@ -132,7 +132,7 @@ public class ThemSanPhamActivity extends AppCompatActivity {
     private void anhXaView() {
         btn_upload = findViewById(R.id.btn_upload);
         img_sp =findViewById(R.id.img_sp);
-        ed_ten = findViewById(R.id.ed_name_sp);
+        ed_ten =findViewById(R.id.ed_name_sp);
         ed_gia = findViewById(R.id.ed_gia_sp);
         ed_masp = findViewById(R.id.ed_ma_sp);
         ed_time = findViewById(R.id.ed_time);

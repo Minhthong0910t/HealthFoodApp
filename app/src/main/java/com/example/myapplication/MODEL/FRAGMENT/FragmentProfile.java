@@ -1,4 +1,4 @@
-package com.example.myapplication.FRAGMENT;
+package com.example.myapplication.MODEL.FRAGMENT;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -109,6 +109,7 @@ List<KhachHang> list;
                         });
                 Toast.makeText(getContext(), "cap nhat thong tin thanh cong", Toast.LENGTH_SHORT).show();
             }
+
         });
         avt_update.setOnClickListener(new View.OnClickListener() {
             @Override

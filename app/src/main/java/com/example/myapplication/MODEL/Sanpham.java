@@ -3,25 +3,25 @@ package com.example.myapplication.MODEL;
 import java.util.Map;
 
 public class Sanpham {
-    private String maLoai;
     private String masp;
     private String name;
+    private  String maloai;
     private double price;
     private int time_ship;
     private String describe;//mo ta
     private int luot_mua;//so luong
+
     private int favorite;
     private String imgURL;
-
+    private Map<String, Comment> comments;
     private String ten_loai;
     private String id_kh;
     private int starDanhGia;
 
-    public Sanpham() {
+    public Sanpham(String maLoai, String masp, String name, double price, int time_ship, String describe, int favorite, int i, String muri, String lspName, Object id_kh, int starDanhGia) {
     }
 
-    public Sanpham(String maLoai, String masp, String name, double price, int time_ship, String describe, int luot_mua, int favorite, String imgURL, String ten_loai, String id_kh, int starDanhGia) {
-        this.maLoai = maLoai;
+    public Sanpham(String masp, String name, double price, int time_ship, String describe, int luot_mua, int favorite, String imgURL, Map<String, Comment> comments, String ten_loai, String id_kh, int starDanhGia) {
         this.masp = masp;
         this.name = name;
         this.price = price;
@@ -30,17 +30,10 @@ public class Sanpham {
         this.luot_mua = luot_mua;
         this.favorite = favorite;
         this.imgURL = imgURL;
+        this.comments = comments;
         this.ten_loai = ten_loai;
         this.id_kh = id_kh;
         this.starDanhGia = starDanhGia;
-    }
-
-    public String getMaLoai() {
-        return maLoai;
-    }
-
-    public void setMaLoai(String maLoai) {
-        this.maLoai = maLoai;
     }
 
     public String getId_kh() {
@@ -115,6 +108,13 @@ public class Sanpham {
         this.imgURL = imgURL;
     }
 
+    public Map<String, Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Map<String, Comment> comments) {
+        this.comments = comments;
+    }
 
     public String getTen_loai() {
         return ten_loai;
@@ -131,4 +131,7 @@ public class Sanpham {
     public void setStarDanhGia(int starDanhGia) {
         this.starDanhGia = starDanhGia;
     }
+
+
+
 }
